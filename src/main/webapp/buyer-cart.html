@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUGA'S MART - Shopping Cart</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.buyer-cart-page {
+    background: #f7f3ea;
+    color: #26352f;
+}
+
+.cart-main {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+    padding: 55px 0 80px;
+}
+
+.cart-intro {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.cart-intro .eyebrow {
+    color: #9a7237;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+}
+
+.cart-intro h1 {
+    color: #176b52;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(32px, 5vw, 48px);
+    margin: 8px 0;
+}
+
+.cart-intro p {
+    color: #66716b;
+}
+
+.cart-items {
+    display: grid;
+    gap: 18px;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    gap: 22px;
+    align-items: center;
+    background: #fffdf7;
+    border: 1px solid #ddd3c0;
+    border-radius: 20px 8px 20px 8px;
+    padding: 18px;
+}
+
+.cart-item-image-wrap {
+    width: 150px;
+    height: 125px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #ebe6dc;
+}
+
+.cart-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cart-item-details h3 {
+    margin: 0 0 8px;
+    color: #26352f;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.cart-item-seller {
+    color: #77736d;
+    font-size: 13px;
+    margin: 5px 0;
+}
+
+.cart-item-price {
+    color: #176b52;
+    font-weight: 700;
+    margin: 8px 0;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.quantity-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #cfc5b2;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.quantity-control button {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: #f1ece2;
+    color: #176b52;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.quantity-control span {
+    min-width: 38px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.cart-delete-button {
+    border: 1px solid #a64b3c;
+    background: #fff;
+    color: #a64b3c;
+    border-radius: 9px;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.cart-delete-button:hover {
+    background: #a64b3c;
+    color: #fff;
+}
+
+.cart-item-total {
+    color: #176b52;
+    font-weight: 800;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.cart-summary {
+    margin-top: 25px;
+    background: #fffdf7;
+    border: 1px solid #ddd3c0;
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cart-summary strong {
+    color: #176b52;
+    font-size: 25px;
+}
+
+.cart-summary-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cart-summary-actions a {
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+.continue-shopping {
+    border: 1px solid #176b52;
+    color: #176b52;
+}
+
+.checkout-button {
+    background: #176b52;
+    color: #fff;
+}
+
+.cart-empty-state {
+    text-align: center;
+    background: #fffdf7;
+    border: 1px solid #ddd3c0;
+    border-radius: 20px;
+    padding: 55px 20px;
+}
+
+.cart-empty-icon {
+    font-size: 48px;
+}
+
+.cart-empty-state h3 {
+    color: #176b52;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+}
+
+.cart-empty-state p {
+    color: #77736d;
+}
+
+.cart-empty-state a {
+    display: inline-block;
+    margin-top: 12px;
+    background: #176b52;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    .cart-item {
+        grid-template-columns: 100px 1fr;
+    }
+
+    .cart-item-image-wrap {
+        width: 100px;
+        height: 100px;
+    }
+
+    .cart-item-total {
+        grid-column: 2;
+    }
+
+    .cart-summary {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+</style>
+</head>
+
+<body class="buyer-cart-page">
+
+<header class="site-header">
+    <div class="brand">
+        <div class="brand-mark">S</div>
+        <div class="brand-text">
+            <strong>SUGA'S MART</strong>
+            <span>FURNITURE MARKETPLACE</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a href="buyer-dashboard.html">←🏠</a>
+        <a href="buyer-products.html">🛍️</a>
+        <a href="buyer-wishlist.html" title="Wishlist">♡</a>
+        <a href="buyer-cart.html" class="active" title="Cart">
+            🛒 <span id="cartCount">0</span>
+        </a>
+        <a href="buyer-orders.html" title="Orders">📦</a>
+        <a href="buyer-profile.html" title="Profile">👤</a>
+    </nav>
+</header>
+
+<main class="cart-main">
+
+    <section class="cart-intro">
+        <p class="eyebrow">YOUR SHOPPING BAG</p>
+        <h1>Shopping Cart</h1>
+        <p>Review your selected furniture before checkout.</p>
+    </section>
+
+    <section
+        id="cartItems"
+        class="cart-items"
+        aria-live="polite"
+    ></section>
+
+    <section class="cart-summary">
+        <div>
+            <span>Total: </span>
+            <strong id="cartTotal">₹0</strong>
+        </div>
+
+        <div class="cart-summary-actions">
+            <a
+                href="buyer-products.html"
+                class="continue-shopping"
+            >
+                Continue Shopping
+            </a>
+
+            <a
+                href="buyer-checkout.html"
+                class="checkout-button"
+            >
+                Proceed to Checkout
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

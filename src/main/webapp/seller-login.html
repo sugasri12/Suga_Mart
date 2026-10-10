@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Seller Login</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Remove underline from SUGA MART brand */
+        .brand,
+        .brand:hover,
+        .brand:focus,
+        .brand:active {
+            text-decoration: none;
+        }
+
+        .brand h1,
+        .brand p,
+        .brand span {
+            text-decoration: none;
+        }
+
+        /* Show Password */
+        .password-field {
+            position: relative;
+        }
+
+        .show-password {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 9px;
+
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+
+            color: #777267;
+
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .show-password input {
+            width: 15px;
+            height: 15px;
+
+            margin: 0;
+
+            accent-color: #176b52;
+
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+<body class="seller-login-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+            <div class="auth-header">
+
+                <p class="eyebrow">
+                    SELLER PORTAL
+                </p>
+
+                <h2>
+                    Seller <span>Login</span>
+                </h2>
+
+                <p>
+                    Login to manage your SUGA MART furniture store.
+                </p>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form
+                id="sellerLoginForm"
+                class="auth-form"
+            >
+
+                <div class="form-group">
+
+                    <label for="sellerEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="sellerEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group password-field">
+
+                    <label for="sellerPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="sellerPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <label class="show-password">
+
+                        <input
+                            type="checkbox"
+                            id="showSellerPassword"
+                        >
+
+                        <span>
+                            Show Password
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN MESSAGE -->
+
+            <p
+                id="sellerLoginMessage"
+                class="form-message"
+            ></p>
+
+
+            <!-- FORGOT PASSWORD -->
+
+            <div class="auth-link">
+
+                <a href="seller-forgot-password.html">
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <div class="auth-footer-text">
+
+                <p>
+                    Don't have a seller account?
+                </p>
+
+                <a href="seller-create-account.html">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <div class="back-link">
+
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <!-- SHOW PASSWORD -->
+
+    <script>
+        const showSellerPassword =
+            document.getElementById("showSellerPassword");
+
+        const sellerPassword =
+            document.getElementById("sellerPassword");
+
+        showSellerPassword.addEventListener("change", function () {
+
+            if (this.checked) {
+                sellerPassword.type = "text";
+            } else {
+                sellerPassword.type = "password";
+            }
+
+        });
+    </script>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

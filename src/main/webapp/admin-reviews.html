@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Admin Reviews</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="api-config.js"></script>
+</head>
+
+<body class="admin-reviews-page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+
+        <div class="brand">
+            <h1>SUGA MART</h1>
+            <p>FURNITURE MARKETPLACE</p>
+        </div>
+
+        <nav class="main-nav">
+            <a href="admin-dashboard.html">←🏠</a>
+            <a href="admin-users.html">Users</a>
+            <a href="admin-products.html">🛍️</a>
+            <a href="admin-profile.html">👤</a>
+
+            <button
+                type="button"
+                data-logout
+                class="logout-button">
+                Logout
+            </button>
+        </nav>
+
+    </header>
+
+    <!-- MAIN -->
+    <main class="orders-main">
+
+        <section class="orders-intro">
+            <p class="eyebrow">ADMIN · REVIEWS</p>
+
+            <h2>Manage <span>Reviews</span></h2>
+
+            <p>
+                View and manage customer reviews and feedback
+                for SUGA MART products.
+            </p>
+        </section>
+
+        <!-- REVIEW LIST -->
+        <section class="orders-section" id="reviewsList">
+            <p style="text-align: center; color: #66716b; padding: 20px;">Loading customer reviews from database...</p>
+        </section>
+
+        <!-- EMPTY MESSAGE -->
+        <p id="noReviewsMessage" hidden style="text-align: center; color: #66716b; padding: 30px; font-size: 16px;">
+            No customer reviews found in MySQL database.
+        </p>
+
+        <!-- INFORMATION -->
+        <section class="information-card">
+            <p class="eyebrow">REVIEW MANAGEMENT</p>
+
+            <h3>Keep customer feedback organized.</h3>
+
+            <p>
+                Review live customer ratings and feedback stored in MySQL, then
+                approve or remove reviews from the marketplace in real time.
+            </p>
+        </section>
+
+        <!-- BACK TO DASHBOARD -->
+        <div class="page-bottom-action">
+            <a href="admin-dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- LIVE REVIEW FUNCTIONS -->
+    <script>
+        async function loadLiveReviews() {
+            const list = document.getElementById("reviewsList");
+            const emptyMsg = document.getElementById("noReviewsMessage");
+            if (!list) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/reviews`);
+                const data = await response.json();
+
+                if (response.ok && data.success && Array.isArray(data.reviews) && data.reviews.length > 0) {
+                    list.innerHTML = "";
+                    emptyMsg.hidden = true;
+
+                    data.reviews.forEach((rev, idx) => {
+                        const stars = "★".repeat(Math.min(5, Math.max(1, rev.rating))) + "☆".repeat(Math.max(0, 5 - rev.rating));
+                        const isApproved = rev.status === "Approved";
+                        const statusClass = isApproved ? "status-approved" : "status-published";
+
+                        const card = document.createElement("article");
+                        card.className = "order-card";
+                        card.dataset.id = rev.id;
+                        card.innerHTML = `
+                            <div class="order-card-header">
+                                <div>
+                                    <p class="eyebrow">REVIEW #${rev.id}</p>
+                                    <h3>${rev.product_name}</h3>
+                                </div>
+                                <span class="order-status ${statusClass}">
+                                    ${rev.status || "Published"}
+                                </span>
+                            </div>
+                            <div class="order-card-content">
+                                <div class="order-information">
+                                    <p><strong>Customer:</strong> ${rev.customer_name}</p>
+                                    <p><strong>Rating:</strong> <span class="review-rating" style="color:#d49a2a;">${stars}</span> (${rev.rating}/5)</p>
+                                    <p><strong>Review:</strong> "${rev.review_text}"</p>
+                                    <p><strong>Status:</strong> <span class="review-status">${rev.status || "Published"}</span></p>
+                                    <p><strong>Date:</strong> ${new Date(rev.created_at).toLocaleDateString("en-IN")}</p>
+                                </div>
+                                <div class="order-actions">
+                                    <button
+                                        type="button"
+                                        class="primary-button"
+                                        onclick="approveReview(${rev.id}, this)"
+                                        ${isApproved ? 'disabled style="opacity:0.7; cursor:default;"' : ''}>
+                                        ${isApproved ? 'Approved' : 'Approve'}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="secondary-button"
+                                        onclick="removeReview(${rev.id}, this, '${rev.product_name.replace(/'/g, "\\'")}')">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        list.appendChild(card);
+                    });
+                } else {
+                    list.innerHTML = "";
+                    emptyMsg.hidden = false;
+                }
+            } catch (err) {
+                console.error("Error loading reviews:", err);
+                list.innerHTML = `<p style="text-align: center; color: #b00020;">Could not load reviews from database.</p>`;
+            }
+        }
+
+        async function approveReview(reviewId, button) {
+            try {
+                const response = await fetch(`${API_BASE}/api/reviews/${reviewId}/status`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ status: "Approved" })
+                });
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const card = button.closest(".order-card");
+                    if (card) {
+                        const badge = card.querySelector(".order-status");
+                        const statusTxt = card.querySelector(".review-status");
+                        if (badge) {
+                            badge.textContent = "Approved";
+                            badge.className = "order-status status-approved";
+                        }
+                        if (statusTxt) statusTxt.textContent = "Approved";
+                    }
+                    button.textContent = "Approved";
+                    button.disabled = true;
+                    button.style.opacity = "0.7";
+                    button.style.cursor = "default";
+                } else {
+                    alert(data.message || "Failed to approve review.");
+                }
+            } catch (err) {
+                console.error("Approve review failed:", err);
+                alert("Server error approving review.");
+            }
+        }
+
+        async function removeReview(reviewId, button, productName) {
+            if (!confirm(`Are you sure you want to permanently delete the review for "${productName}" from MySQL?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/reviews/${reviewId}`, {
+                    method: "DELETE"
+                });
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const card = button.closest(".order-card");
+                    if (card) card.remove();
+
+                    const list = document.getElementById("reviewsList");
+                    if (list && list.querySelectorAll(".order-card").length === 0) {
+                        document.getElementById("noReviewsMessage").hidden = false;
+                    }
+                } else {
+                    alert(data.message || "Failed to remove review from database.");
+                }
+            } catch (err) {
+                console.error("Remove review failed:", err);
+                alert("Server error deleting review.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadLiveReviews);
+    </script>
+
+</body>
+</html>

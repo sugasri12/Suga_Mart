@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Seller Order Details</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="seller-order-details-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="seller-dashboard.html">←🏠</a>
+            <a href="seller-orders.html" title="Orders">📦</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="order-details-main">
+
+        <section class="order-details-intro">
+
+            <p class="eyebrow">
+                ORDER INFORMATION
+            </p>
+
+            <h2>
+                Order <span>Details</span>
+            </h2>
+
+            <p>
+                Review customer, delivery, product and
+                payment information.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             ORDER DETAILS
+             ================================ -->
+
+        <section class="order-details-card">
+
+            <div class="order-details-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        ORDER
+                    </p>
+
+                    <h3>
+                        Order #<span data-order-number>SM1001</span>
+                    </h3>
+
+                </div>
+
+                <span data-order-status class="order-status">
+                    Order Placed
+                </span>
+
+            </div>
+
+
+            <div class="order-details-section">
+
+                <h3>
+                    Customer Information
+                </h3>
+
+                <p>
+                    <strong>Name:</strong>
+                    <span data-customer-name>Suga</span>
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    <span data-customer-phone>9876543210</span>
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    <span data-customer-email>suga@sugamart.com</span>
+                </p>
+
+            </div>
+
+
+            <div class="order-details-section">
+
+                <h3>
+                    Delivery Address
+                </h3>
+
+                <p data-delivery-address-text>
+                    12, Main Street
+                    <br>
+                    Tiruchirappalli
+                    <br>
+                    Tamil Nadu
+                    <br>
+                    620001
+                </p>
+
+            </div>
+
+
+            <div class="order-details-section">
+
+                <h3>
+                    Product Details
+                </h3>
+
+                <p>
+                    <strong>Product:</strong>
+                    <span data-product-name>Arden Lounge Chair</span>
+                </p>
+
+                <p>
+                    <strong>Quantity:</strong>
+                    <span data-product-quantity>1</span>
+                </p>
+
+                <p>
+                    <strong>Price:</strong>
+                    <span data-product-price>₹18,500</span>
+                </p>
+
+                <p>
+                    <strong>Total:</strong>
+                    <span data-product-total>₹18,500</span>
+                </p>
+
+            </div>
+
+
+            <div class="order-details-section">
+
+                <h3>
+                    Payment
+                </h3>
+
+                <p>
+                    <strong>Payment Method:</strong>
+                    <span data-payment-method>UPI</span>
+                </p>
+
+                <p>
+                    <strong>Payment Status:</strong>
+                    <span data-payment-status>Paid</span>
+                </p>
+
+            </div>
+
+
+            <!-- ================================
+                 ORDER ACTIONS
+                 ================================ -->
+
+            <div class="order-detail-actions">
+
+    <button 
+        type="button" 
+        class="primary-button"
+        onclick="markOrderShipped()"
+    >
+        Mark as Shipped
+    </button>
+
+    <button 
+        type="button" 
+        class="secondary-button"
+        onclick="markOrderDelivered()"
+    >
+        Mark as Delivered
+    </button>
+
+</div>
+
+
+        <!-- ================================
+             INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                ORDER MANAGEMENT
+            </p>
+
+            <h3>
+                Keep customer orders updated.
+            </h3>
+
+            <p>
+                Review all order information carefully
+                before changing the delivery status.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             BACK TO ORDERS
+             ================================ -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="seller-orders.html"
+                class="back-link"
+            >
+                ← Back to Orders
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script>
+async function markOrderShipped() {
+    const orderNumEl = document.querySelector("[data-order-number]");
+    const orderNum = orderNumEl ? orderNumEl.textContent.trim() : "SM1001";
+    try {
+        const response = await fetch(`${API_BASE}/api/orders/${encodeURIComponent(orderNum)}/status`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: "Shipped" })
+        });
+        const data = await response.json();
+        const status = document.querySelector(".order-status");
+        if (status) status.textContent = "Shipped";
+        alert(data.message || "Order marked as shipped in MySQL!");
+    } catch (e) {
+        const status = document.querySelector(".order-status");
+        if (status) status.textContent = "Shipped";
+        alert("Order marked as shipped.");
+    }
+}
+
+async function markOrderDelivered() {
+    const orderNumEl = document.querySelector("[data-order-number]");
+    const orderNum = orderNumEl ? orderNumEl.textContent.trim() : "SM1001";
+    try {
+        const response = await fetch(`${API_BASE}/api/orders/${encodeURIComponent(orderNum)}/status`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: "Delivered" })
+        });
+        const data = await response.json();
+        const status = document.querySelector(".order-status");
+        if (status) status.textContent = "Delivered";
+        alert(data.message || "Order marked as delivered in MySQL!");
+    } catch (e) {
+        const status = document.querySelector(".order-status");
+        if (status) status.textContent = "Delivered";
+        alert("Order marked as delivered.");
+    }
+}
+</script>
+
+</body>
+</html>

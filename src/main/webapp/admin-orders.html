@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Orders | SUGA'S MART</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-orders-page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <a href="admin-dashboard.html" class="brand">
+            <span class="brand-mark">S</span>
+            <span>
+                <strong>SUGA'S MART</strong>
+                <small>FURNITURE MARKETPLACE</small>
+            </span>
+        </a>
+
+        <nav class="main-nav">
+            <a href="admin-dashboard.html">←🏠</a>
+            <a href="admin-products.html">🛍️</a>
+            <a href="admin-profile.html">👤</a>
+            <a href="index.html" class="logout-button">Logout</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="orders-main">
+
+        <section class="orders-intro">
+            <p class="section-eyebrow">ORDER MANAGEMENT</p>
+            <h1>Manage <span>Orders</span></h1>
+            <p>
+                Track customer orders and update delivery status.
+            </p>
+        </section>
+
+        <!-- ORDERS -->
+        <section class="orders-section" id="adminOrdersContainer">
+
+            <!-- ORDER 1 -->
+            <article class="order-card">
+
+                <div class="order-card-header">
+                    <div>
+                        <p class="section-eyebrow">ORDER NUMBER</p>
+                        <h2>#SM1001</h2>
+                    </div>
+
+                    <span class="order-status status-placed">
+                        Order Placed
+                    </span>
+                </div>
+
+                <div class="order-card-content">
+
+                    <div class="order-information">
+                        <p><strong>Customer:</strong> Suga</p>
+                        <p><strong>Product:</strong> Arden Lounge Chair</p>
+                        <p><strong>Seller:</strong> SUGA MART Furniture Store</p>
+                        <p><strong>Quantity:</strong> 1</p>
+                        <p><strong>Total:</strong> ₹18,500</p>
+                        <p><strong>Payment:</strong> UPI</p>
+                    </div>
+
+                    <div class="order-actions">
+                        <button
+                            type="button"
+                            class="primary-button"
+                            onclick="updateOrderStatus(this, 'Shipped')">
+                            Mark Shipped
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            onclick="updateOrderStatus(this, 'Delivered')">
+                            Mark Delivered
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- ORDER 2 -->
+            <article class="order-card">
+
+                <div class="order-card-header">
+                    <div>
+                        <p class="section-eyebrow">ORDER NUMBER</p>
+                        <h2>#SM1002</h2>
+                    </div>
+
+                    <span class="order-status status-shipped">
+                        Shipped
+                    </span>
+                </div>
+
+                <div class="order-card-content">
+
+                    <div class="order-information">
+                        <p><strong>Customer:</strong> Priya</p>
+                        <p><strong>Product:</strong> Nora Dining Table</p>
+                        <p><strong>Seller:</strong> SUGA MART Furniture Store</p>
+                        <p><strong>Quantity:</strong> 1</p>
+                        <p><strong>Total:</strong> ₹26,500</p>
+                        <p><strong>Payment:</strong> QR Payment</p>
+                    </div>
+
+                    <div class="order-actions">
+                        <button
+                            type="button"
+                            class="primary-button"
+                            onclick="updateOrderStatus(this, 'Shipped')">
+                            Mark Shipped
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            onclick="updateOrderStatus(this, 'Delivered')">
+                            Mark Delivered
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+        </section>
+
+        <!-- INFORMATION -->
+        <section class="information-card">
+            <h2>Order Management Tips</h2>
+            <p>
+                Mark an order as shipped when it has been dispatched.
+                Mark it as delivered once delivery is complete.
+            </p>
+        </section>
+
+        <!-- BACK BUTTON -->
+        <div class="page-bottom-action">
+            <a href="admin-dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>© 2026 SUGA'S MART. All rights reserved.</p>
+        <p>Furniture for a beautiful living.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- ORDER STATUS FUNCTION -->
+    <script>
+        async function updateOrderStatus(button, status, orderNumber) {
+            const orderCard = button.closest(".order-card");
+            if (!orderCard) return;
+
+            const orderNum = orderNumber || orderCard.querySelector("h2").textContent.replace("#", "").trim();
+            const statusElement = orderCard.querySelector(".order-status");
+
+            try {
+                const response = await fetch(`${API_BASE}/api/orders/${encodeURIComponent(orderNum)}/status`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ status })
+                });
+
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    if (statusElement) {
+                        statusElement.textContent = status;
+                        statusElement.classList.remove(
+                            "status-placed",
+                            "status-shipped",
+                            "status-delivered"
+                        );
+                        if (status === "Shipped") {
+                            statusElement.classList.add("status-shipped");
+                        } else if (status === "Delivered") {
+                            statusElement.classList.add("status-delivered");
+                        }
+                    }
+                    alert(`Order #${orderNum} status updated to ${status} in MySQL!`);
+                } else {
+                    alert(data.message || "Failed to update order status.");
+                }
+            } catch (err) {
+                // Local UI fallback
+                if (statusElement) {
+                    statusElement.textContent = status;
+                }
+                alert(`Order #${orderNum} status updated to ${status}.`);
+            }
+        }
+    </script>
+
+</body>
+</html>

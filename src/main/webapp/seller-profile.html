@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Seller Profile</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="seller-profile-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="seller-dashboard.html">←🏠</a>
+            <a href="seller-products.html" class="active">🛍️</a>
+            <a href="seller-orders.html" title="Orders">📦</a>
+            <a href="seller-profile.html" title="Profile">👤</a>
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="profile-main">
+
+        <section class="profile-intro">
+
+            <p class="eyebrow">
+                SELLER ACCOUNT
+            </p>
+
+            <h2>
+                Seller <span>Profile</span>
+            </h2>
+
+            <p>
+                Manage your SUGA MART seller account
+                information.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             PROFILE CARD
+             ================================ -->
+
+        <section class="profile-card">
+
+            <div class="profile-card-header">
+
+                <p class="eyebrow">
+                    ACCOUNT DETAILS
+                </p>
+
+                <h3>
+                    SUGA MART Seller
+                </h3>
+
+            </div>
+
+
+            <div class="profile-details">
+
+                <div class="profile-detail-item">
+
+                    <h4>
+                        Seller Name
+                    </h4>
+
+                    <p data-account-name>
+                        SUGA MART Seller
+                    </p>
+
+                </div>
+
+
+                <div class="profile-detail-item">
+
+                    <h4>
+                        Email Address
+                    </h4>
+
+                    <p data-account-email>
+                        seller@sugamart.com
+                    </p>
+
+                </div>
+
+
+                <div class="profile-detail-item">
+
+                    <h4>
+                        Phone Number
+                    </h4>
+
+                    <p data-account-phone>
+                        9876543210
+                    </p>
+
+                </div>
+
+
+                <div class="profile-detail-item">
+
+                    <h4>
+                        Store Name
+                    </h4>
+
+                    <p>
+                        SUGA MART Furniture Store
+                    </p>
+
+                </div>
+
+
+                <div class="profile-detail-item">
+
+                    <h4>
+                        Store Category
+                    </h4>
+
+                    <p>
+                        Furniture
+                    </p>
+
+                </div>
+
+
+                <div class="profile-detail-item">
+
+                    <h4>
+                        Account Status
+                    </h4>
+
+                    <p>
+                        Active
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================
+                 PROFILE ACTION
+                 ================================ -->
+
+            <div class="profile-actions">
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="alert('Profile editing will be connected with the backend later.')"
+                >
+                    Edit Profile
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                SELLER INFORMATION
+            </p>
+
+            <h3>
+                Your store details are ready to manage.
+            </h3>
+
+            <p>
+                Profile editing and account updates will
+                be connected with the backend later.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             LOGOUT
+             ================================ -->
+
+        <div class="profile-bottom-action">
+
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <!-- ================================
+             BACK TO DASHBOARD
+             ================================ -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="seller-dashboard.html"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

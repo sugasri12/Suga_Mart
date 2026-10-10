@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Edit Product</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="seller-edit-product-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="seller-dashboard.html">←🏠</a>
+            <a href="seller-products.html" class="active">🛍️</a>
+            <a href="seller-orders.html" title="Orders">📦</a>
+            <a href="seller-profile.html" title="Profile">👤</a>
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+            <div class="auth-header">
+
+                <p class="eyebrow">
+                    PRODUCT MANAGEMENT
+                </p>
+
+                <h2>
+                    Edit <span>Product</span>
+                </h2>
+
+                <p>
+                    Update your furniture product details.
+                </p>
+
+            </div>
+
+
+            <!-- ================================
+                 EDIT PRODUCT FORM
+                 ================================ -->
+
+            <form
+                id="sellerEditProductForm"
+                class="auth-form"
+            >
+
+                <div class="form-group">
+
+                    <label for="editProductName">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editProductName"
+                        value="Arden Lounge Chair"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editProductCategory">
+                        Category
+                    </label>
+
+                    <select
+                        id="editProductCategory"
+                        required
+                    >
+
+                        <option
+                            value="Living Room"
+                            selected
+                        >
+                            Living Room
+                        </option>
+
+                        <option value="Bedroom">
+                            Bedroom
+                        </option>
+
+                        <option value="Dining Room">
+                            Dining Room
+                        </option>
+
+                        <option value="Study Room">
+                            Study Room
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editProductPrice">
+                        Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editProductPrice"
+                        value="18500"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editProductStock">
+                        Stock Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editProductStock"
+                        value="10"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editProductDescription">
+                        Product Description
+                    </label>
+
+                    <textarea
+                        id="editProductDescription"
+                        rows="5"
+                        required
+                    >Comfortable and stylish lounge chair for modern living rooms.</textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Changes
+                </button>
+
+            </form>
+
+
+            <!-- ================================
+                 MESSAGE
+                 ================================ -->
+
+            <p
+                id="sellerEditProductMessage"
+                class="form-message"
+            ></p>
+
+
+            <!-- ================================
+                 BACK LINK
+                 ================================ -->
+
+            <div class="auth-footer-text">
+
+                <a
+                    href="seller-products.html"
+                    class="back-link"
+                >
+                    ← Back to Products
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const form = document.getElementById("sellerEditProductForm");
+        const msg = document.getElementById("sellerEditProductMessage");
+        const nameInput = document.getElementById("editProductName");
+        const catSelect = document.getElementById("editProductCategory");
+        const priceInput = document.getElementById("editProductPrice");
+        const stockInput = document.getElementById("editProductStock");
+        const descInput = document.getElementById("editProductDescription");
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = Number(urlParams.get("id")) || 1;
+
+        // Fetch current product details from MySQL
+        try {
+            const res = await fetch(`${API_BASE}/api/products/${productId}`);
+            const data = await res.json();
+            if (res.ok && data.success && data.product) {
+                const p = data.product;
+                if (nameInput) nameInput.value = p.name;
+                if (catSelect) catSelect.value = p.category;
+                if (priceInput) priceInput.value = p.price;
+                if (stockInput) stockInput.value = p.stock !== undefined ? p.stock : 10;
+                if (descInput) descInput.value = p.description;
+            }
+        } catch (e) {
+            console.warn("Could not load product from MySQL:", e);
+        }
+
+        if (!form) return;
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const name = nameInput.value.trim();
+            const category = catSelect.value;
+            const price = Number(priceInput.value);
+            const stock = Number(stockInput.value);
+            const description = descInput.value.trim();
+
+            const submitBtn = form.querySelector("button[type='submit']");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Saving...";
+
+            try {
+                const response = await fetch(`${API_BASE}/api/products/${productId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name,
+                        category,
+                        price,
+                        stock,
+                        description
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    msg.textContent = data.message || "Product updated successfully in MySQL!";
+                    msg.style.color = "#176b52";
+                    setTimeout(() => {
+                        window.location.href = "seller-products.html";
+                    }, 1200);
+                } else {
+                    msg.textContent = data.message || "Failed to update product.";
+                    msg.style.color = "#a33a32";
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Save Changes";
+                }
+            } catch (err) {
+                msg.textContent = "Network error. Please ensure backend server is running.";
+                msg.style.color = "#a33a32";
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Save Changes";
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

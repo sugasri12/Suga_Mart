@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Seller Products</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =================================
+           SELLER PRODUCTS CATALOGUE
+           ================================= */
+
+        .seller-products-page .products-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 65px 24px;
+        }
+
+        .seller-products-page .products-intro {
+            margin-bottom: 30px;
+        }
+
+        .seller-products-page .products-intro h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 42px;
+            color: #263b31;
+            margin: 8px 0 12px;
+        }
+
+        .seller-products-page .products-intro h2 span {
+            color: #9a7237;
+        }
+
+        .seller-products-page .products-intro > p:last-child {
+            color: #6f6a5e;
+            line-height: 1.7;
+        }
+
+        /* Search + Add */
+
+        .seller-product-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .seller-search-box {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .seller-search-box input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 17px;
+            border: 1px solid #d8cfbd;
+            border-radius: 12px;
+            background: #fffdf7;
+            color: #263b31;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .seller-search-box input:focus {
+            border-color: #9a7237;
+            box-shadow: 0 0 0 3px rgba(154, 114, 55, 0.08);
+        }
+
+        .seller-add-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: #176b52;
+            color: #fffdf7;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #176b52;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .seller-add-button:hover {
+            background: #9a7237;
+            border-color: #9a7237;
+            transform: translateY(-2px);
+        }
+
+        /* Categories */
+
+        .seller-category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 30px;
+        }
+
+        .seller-category-button {
+            padding: 8px 14px;
+            border: 1px solid #d8cfbd;
+            border-radius: 20px;
+            background: #fffdf7;
+            color: #5f5a50;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            transition: all 0.25s ease;
+        }
+
+        .seller-category-button:hover,
+        .seller-category-button.active {
+            background: #176b52;
+            border-color: #176b52;
+            color: #fffdf7;
+        }
+
+        /* Product count */
+
+        .seller-product-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .seller-product-heading h3 {
+            margin: 0;
+            color: #263b31;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+        }
+
+        .seller-product-count {
+            color: #8a7654;
+            font-size: 13px;
+        }
+
+        /* Product grid */
+
+        .seller-product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        /* Product card */
+
+        .seller-product-card {
+            background: #fffdf7;
+            border: 1px solid #ddd3c0;
+            border-radius: 22px 8px 22px 8px;
+            overflow: hidden;
+            box-shadow: 0 7px 22px rgba(45, 55, 45, 0.06);
+            transition: all 0.25s ease;
+        }
+
+        .seller-product-card:hover {
+            border-color: #b99a62;
+            box-shadow: 0 14px 30px rgba(45, 55, 45, 0.11);
+            transform: translateY(-3px);
+        }
+
+        /* Product image */
+
+        .seller-product-image-wrap {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: #eee8da;
+        }
+
+        .seller-product-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .seller-product-card:hover .seller-product-image {
+            transform: scale(1.04);
+        }
+
+        .seller-product-category {
+            position: absolute;
+            top: 13px;
+            left: 13px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: rgba(255, 253, 247, 0.94);
+            color: #176b52;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+        }
+
+        /* Content */
+
+        .seller-product-content {
+            padding: 19px;
+        }
+
+        .seller-product-content h3 {
+            margin: 0 0 8px;
+            color: #263b31;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            line-height: 1.3;
+        }
+
+        .seller-product-description {
+            margin: 0 0 10px;
+            color: #777165;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .seller-product-seller {
+            margin: 0 0 10px;
+            color: #6f6a5e;
+            font-size: 12px;
+        }
+
+        .seller-product-seller strong {
+            color: #176b52;
+        }
+
+        .seller-product-rating {
+            margin-bottom: 11px;
+            color: #9a7237;
+            font-size: 13px;
+        }
+
+        .seller-review-count {
+            color: #817a6c;
+            font-size: 11px;
+        }
+
+        .seller-product-price {
+            color: #176b52;
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .seller-product-stock {
+            color: #6f6a5e;
+            font-size: 12px;
+            margin-bottom: 17px;
+        }
+
+        /* Buttons */
+
+        .seller-product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .seller-edit-button,
+        .seller-delete-button {
+            flex: 1;
+            padding: 9px 10px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .seller-edit-button {
+            background: transparent;
+            color: #176b52;
+            border: 1px solid #176b52;
+        }
+
+        .seller-edit-button:hover {
+            background: #176b52;
+            color: #fffdf7;
+        }
+
+        .seller-delete-button {
+            background: #fff8f5;
+            color: #a34d3d;
+            border: 1px solid #d8aaa0;
+        }
+
+        .seller-delete-button:hover {
+            background: #a34d3d;
+            color: #ffffff;
+            border-color: #a34d3d;
+        }
+
+        /* Empty */
+
+        .seller-empty-products {
+            display: none;
+            text-align: center;
+            padding: 45px 20px;
+            color: #777165;
+        }
+
+        /* Information */
+
+        .seller-products-page .information-card {
+            margin-top: 45px;
+        }
+
+        .seller-products-page .page-bottom-action {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .seller-products-page .back-link {
+            color: #176b52;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .seller-products-page .back-link:hover {
+            color: #9a7237;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 950px) {
+
+            .seller-product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .seller-products-page .products-main {
+                padding: 45px 18px;
+            }
+
+            .seller-products-page .products-intro h2 {
+                font-size: 32px;
+            }
+
+            .seller-product-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .seller-search-box {
+                max-width: none;
+            }
+
+            .seller-add-button {
+                width: 100%;
+            }
+
+            .seller-product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .seller-product-image-wrap {
+                height: 230px;
+            }
+        }
+    </style>
+</head>
+
+<body class="seller-products-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+        <nav class="main-nav">
+            <a href="seller-dashboard.html">←🏠</a>
+            <a href="seller-products.html" class="active">🛍️</a>
+            <a href="seller-orders.html" title="Orders">📦</a>
+            <a href="seller-profile.html" title="Profile">👤</a>
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="products-main">
+
+        <section class="products-intro">
+
+            <p class="eyebrow">
+                SELLER PRODUCTS
+            </p>
+
+            <h2>
+                My <span>Products</span>
+            </h2>
+
+            <p>
+                Manage your complete furniture collection,
+                update products and keep your store organized.
+            </p>
+
+        </section>
+
+
+        <!-- SEARCH + ADD -->
+
+        <section class="seller-product-toolbar">
+
+            <div class="seller-search-box">
+
+                <input
+                    type="search"
+                    id="sellerProductSearch"
+                    placeholder="Search products..."
+                >
+
+            </div>
+
+            <a
+                href="seller-add-product.html"
+                class="seller-add-button"
+            >
+                + Add New Product
+            </a>
+
+        </section>
+
+
+        <!-- CATEGORY FILTER -->
+
+        <section class="seller-category-filter">
+
+            <button
+                class="seller-category-button active"
+                data-category="All"
+            >
+                All
+            </button>
+
+            <button
+                class="seller-category-button"
+                data-category="Living Room"
+            >
+                Living Room
+            </button>
+
+            <button
+                class="seller-category-button"
+                data-category="Bedroom"
+            >
+                Bedroom
+            </button>
+
+            <button
+                class="seller-category-button"
+                data-category="Dining"
+            >
+                Dining
+            </button>
+
+            <button
+                class="seller-category-button"
+                data-category="Study Room"
+            >
+                Study Room
+            </button>
+
+            <button
+                class="seller-category-button"
+                data-category="Storage"
+            >
+                Storage
+            </button>
+
+            <button
+                class="seller-category-button"
+                data-category="Outdoor"
+            >
+                Outdoor
+            </button>
+
+        </section>
+
+
+        <!-- PRODUCT HEADING -->
+
+        <section class="seller-product-heading">
+
+            <h3 id="sellerSelectedCategory">
+                All Products
+            </h3>
+
+            <span
+                class="seller-product-count"
+                id="sellerProductCount"
+            >
+                24 Products
+            </span>
+
+        </section>
+
+
+        <!-- PRODUCT GRID -->
+
+        <section>
+
+            <div
+                class="seller-product-grid"
+                id="sellerProductGrid"
+            ></div>
+
+            <div
+                class="seller-empty-products"
+                id="sellerEmptyProducts"
+            >
+                No products found.
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATION -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                PRODUCT MANAGEMENT
+            </p>
+
+            <h3>
+                Keep your furniture collection updated.
+            </h3>
+
+            <p>
+                Add new products, update existing details,
+                or remove products that are no longer
+                available in your store.
+            </p>
+
+        </section>
+
+
+        <!-- BACK -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="seller-dashboard.html"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+
+    <!-- ================================
+         SELLER PRODUCT DATA
+         ================================ -->
+
+    <script>
+
+        const sellerProducts = [
+
+            /* LIVING ROOM */
+
+            {
+                id: 1,
+                name: "Arden Lounge Chair",
+                category: "Living Room",
+                price: 18500,
+                seller: "Urban Wood Studio",
+                rating: "4.8",
+                reviews: 124,
+                stock: 10,
+                description: "Elegant lounge chair designed for modern living spaces.",
+                image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 2,
+                name: "Comfort Sofa Set",
+                category: "Living Room",
+                price: 42500,
+                seller: "Classic Comfort Furniture",
+                rating: "4.7",
+                reviews: 98,
+                stock: 5,
+                description: "Comfortable sofa set with a premium contemporary finish.",
+                image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 3,
+                name: "Velora Accent Chair",
+                category: "Living Room",
+                price: 16400,
+                seller: "Elegant Living Store",
+                rating: "4.6",
+                reviews: 76,
+                stock: 12,
+                description: "Stylish accent chair perfect for cozy corners.",
+                image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 4,
+                name: "Luna Coffee Table",
+                category: "Living Room",
+                price: 12900,
+                seller: "Urban Wood Studio",
+                rating: "4.5",
+                reviews: 64,
+                stock: 15,
+                description: "Minimal coffee table with a warm wooden finish.",
+                image: "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=900&q=80"
+            },
+
+
+            /* BEDROOM */
+
+            {
+                id: 5,
+                name: "Serene Queen Bed",
+                category: "Bedroom",
+                price: 32000,
+                seller: "Modern Home Furnishings",
+                rating: "4.9",
+                reviews: 143,
+                stock: 6,
+                description: "Elegant queen bed designed for comfortable bedrooms.",
+                image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 6,
+                name: "Oakline Bed Frame",
+                category: "Bedroom",
+                price: 28500,
+                seller: "Classic Comfort Furniture",
+                rating: "4.7",
+                reviews: 91,
+                stock: 8,
+                description: "Strong wooden bed frame with a timeless appearance.",
+                image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 7,
+                name: "Elora Bedside Table",
+                category: "Bedroom",
+                price: 8900,
+                seller: "Urban Wood Studio",
+                rating: "4.5",
+                reviews: 55,
+                stock: 14,
+                description: "Compact bedside table with practical storage.",
+                image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 8,
+                name: "Nova Bedroom Cabinet",
+                category: "Bedroom",
+                price: 15400,
+                seller: "Elegant Living Store",
+                rating: "4.6",
+                reviews: 70,
+                stock: 9,
+                description: "Neat storage cabinet for organized bedrooms.",
+                image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=900&q=80"
+            },
+
+
+            /* DINING */
+
+            {
+                id: 9,
+                name: "Nora Dining Table",
+                category: "Dining",
+                price: 26500,
+                seller: "Modern Home Furnishings",
+                rating: "4.8",
+                reviews: 117,
+                stock: 8,
+                description: "Beautiful dining table designed for family gatherings.",
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 10,
+                name: "Aster Dining Chair",
+                category: "Dining",
+                price: 7200,
+                seller: "Urban Wood Studio",
+                rating: "4.6",
+                reviews: 84,
+                stock: 20,
+                description: "Comfortable dining chair with elegant detailing.",
+                image: "https://images.unsplash.com/photo-1549497538-303791108f95?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 11,
+                name: "Mira Dining Set",
+                category: "Dining",
+                price: 38900,
+                seller: "Classic Comfort Furniture",
+                rating: "4.9",
+                reviews: 102,
+                stock: 5,
+                description: "Complete dining set for stylish dining rooms.",
+                image: "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 12,
+                name: "Cedar Dining Bench",
+                category: "Dining",
+                price: 11200,
+                seller: "Elegant Living Store",
+                rating: "4.5",
+                reviews: 61,
+                stock: 11,
+                description: "Wooden dining bench with a natural finish.",
+                image: "https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=900&q=80"
+            },
+
+
+            /* STUDY ROOM */
+
+            {
+                id: 13,
+                name: "Forma Work Desk",
+                category: "Study Room",
+                price: 21500,
+                seller: "Urban Wood Studio",
+                rating: "4.8",
+                reviews: 88,
+                stock: 7,
+                description: "Modern work desk suitable for study and office spaces.",
+                image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 14,
+                name: "StudyPro Chair",
+                category: "Study Room",
+                price: 9800,
+                seller: "Modern Home Furnishings",
+                rating: "4.6",
+                reviews: 72,
+                stock: 13,
+                description: "Comfortable chair for long study sessions.",
+                image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 15,
+                name: "Nova Study Desk",
+                category: "Study Room",
+                price: 18400,
+                seller: "Classic Comfort Furniture",
+                rating: "4.7",
+                reviews: 66,
+                stock: 9,
+                description: "Compact study desk with a clean modern design.",
+                image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 16,
+                name: "Linea Bookshelf",
+                category: "Study Room",
+                price: 14500,
+                seller: "Elegant Living Store",
+                rating: "4.5",
+                reviews: 48,
+                stock: 10,
+                description: "Open bookshelf for books, decor and accessories.",
+                image: "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=80"
+            },
+
+
+            /* STORAGE */
+
+            {
+                id: 17,
+                name: "Mira Sideboard",
+                category: "Storage",
+                price: 32800,
+                seller: "Classic Comfort Furniture",
+                rating: "4.8",
+                reviews: 93,
+                stock: 4,
+                description: "Elegant sideboard offering spacious storage.",
+                image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 18,
+                name: "Luma Storage Cabinet",
+                category: "Storage",
+                price: 22400,
+                seller: "Urban Wood Studio",
+                rating: "4.7",
+                reviews: 81,
+                stock: 7,
+                description: "Modern cabinet for organized home storage.",
+                image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 19,
+                name: "Oak Storage Chest",
+                category: "Storage",
+                price: 17900,
+                seller: "Elegant Living Store",
+                rating: "4.6",
+                reviews: 59,
+                stock: 9,
+                description: "Wooden storage chest with a classic appearance.",
+                image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 20,
+                name: "Forma Display Cabinet",
+                category: "Storage",
+                price: 28600,
+                seller: "Modern Home Furnishings",
+                rating: "4.8",
+                reviews: 74,
+                stock: 6,
+                description: "Premium display cabinet for furniture collections.",
+                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80"
+            },
+
+
+            /* OUTDOOR */
+
+            {
+                id: 21,
+                name: "Garden Lounge Chair",
+                category: "Outdoor",
+                price: 12400,
+                seller: "Urban Wood Studio",
+                rating: "4.6",
+                reviews: 52,
+                stock: 12,
+                description: "Comfortable outdoor lounge chair for relaxing spaces.",
+                image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 22,
+                name: "Terra Outdoor Table",
+                category: "Outdoor",
+                price: 19800,
+                seller: "Classic Comfort Furniture",
+                rating: "4.7",
+                reviews: 63,
+                stock: 8,
+                description: "Durable outdoor table with a refined finish.",
+                image: "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 23,
+                name: "Verde Patio Set",
+                category: "Outdoor",
+                price: 34900,
+                seller: "Elegant Living Store",
+                rating: "4.8",
+                reviews: 79,
+                stock: 5,
+                description: "Complete patio furniture set for outdoor living.",
+                image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80"
+            },
+
+            {
+                id: 24,
+                name: "Breeze Outdoor Bench",
+                category: "Outdoor",
+                price: 15800,
+                seller: "Modern Home Furnishings",
+                rating: "4.5",
+                reviews: 46,
+                stock: 10,
+                description: "Simple outdoor bench with a comfortable design.",
+                image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=80"
+            }
+
+        ];
+
+
+        /* =================================
+           DISPLAY PRODUCTS
+           ================================= */
+
+        const sellerProductGrid =
+            document.getElementById("sellerProductGrid");
+
+        const sellerProductSearch =
+            document.getElementById("sellerProductSearch");
+
+        const sellerProductCount =
+            document.getElementById("sellerProductCount");
+
+        const sellerSelectedCategory =
+            document.getElementById("sellerSelectedCategory");
+
+        const sellerEmptyProducts =
+            document.getElementById("sellerEmptyProducts");
+
+        let selectedSellerCategory = "All";
+
+
+        function displaySellerProducts() {
+
+            const searchText =
+                sellerProductSearch.value
+                    .trim()
+                    .toLowerCase();
+
+            const filteredProducts =
+                sellerProducts.filter(function(product) {
+
+                    const categoryMatch =
+                        selectedSellerCategory === "All" ||
+                        product.category === selectedSellerCategory;
+
+                    const searchMatch =
+                        product.name
+                            .toLowerCase()
+                            .includes(searchText) ||
+
+                        product.category
+                            .toLowerCase()
+                            .includes(searchText) ||
+
+                        product.seller
+                            .toLowerCase()
+                            .includes(searchText);
+
+                    return categoryMatch && searchMatch;
+
+                });
+
+
+            sellerProductGrid.innerHTML = "";
+
+
+            filteredProducts.forEach(function(product) {
+
+                const card =
+                    document.createElement("article");
+
+                card.className =
+                    "seller-product-card";
+
+
+                card.innerHTML = `
+
+                    <div class="seller-product-image-wrap">
+
+                        <img
+                            src="${product.image}"
+                            alt="${product.name}"
+                            class="seller-product-image"
+                            loading="lazy"
+                        >
+
+                        <span class="seller-product-category">
+                            ${product.category}
+                        </span>
+
+                    </div>
+
+
+                    <div class="seller-product-content">
+
+                        <h3>
+                            ${product.name}
+                        </h3>
+
+                        <p class="seller-product-description">
+                            ${product.description}
+                        </p>
+
+                        <p class="seller-product-seller">
+                            Seller:
+                            <strong>
+                                ${product.seller}
+                            </strong>
+                        </p>
+
+                        <div class="seller-product-rating">
+
+                            ★★★★★
+
+                            <span class="seller-review-count">
+                                ${product.rating}
+                                (${product.reviews} reviews)
+                            </span>
+
+                        </div>
+
+                        <div class="seller-product-price">
+                            ₹${product.price.toLocaleString("en-IN")}
+                        </div>
+
+                        <div class="seller-product-stock">
+                            Stock: ${product.stock}
+                        </div>
+
+
+                        <div class="seller-product-actions">
+
+                            <a
+                                href="seller-edit-product.html?id=${product.id}"
+                                class="seller-edit-button"
+                            >
+                                Edit
+                            </a>
+
+                            <button
+                                type="button"
+                                class="seller-delete-button"
+                            >
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                const deleteButton =
+                    card.querySelector(
+                        ".seller-delete-button"
+                    );
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    async function() {
+
+                        const confirmDelete =
+                            confirm(
+                                "Delete " +
+                                product.name +
+                                " from database?"
+                            );
+
+
+                        if (confirmDelete) {
+                            try {
+                                const res = await fetch(`${API_BASE}/api/products/${product.id}`, {
+                                    method: "DELETE"
+                                });
+                                const data = await res.json();
+                                if (res.ok && data.success) {
+                                    card.remove();
+                                    sellerProducts = sellerProducts.filter(p => Number(p.id) !== Number(product.id));
+                                    displaySellerProducts();
+                                    alert(`Product "${product.name}" deleted successfully from MySQL!`);
+                                } else {
+                                    alert(data.message || "Could not delete product.");
+                                }
+                            } catch (e) {
+                                card.remove();
+                                alert("Product removed from view.");
+                            }
+                        }
+
+                    }
+                );
+
+
+                sellerProductGrid.appendChild(card);
+
+            });
+
+
+            sellerProductCount.textContent =
+                filteredProducts.length +
+                " Products";
+
+
+            sellerSelectedCategory.textContent =
+                selectedSellerCategory === "All"
+                    ? "All Products"
+                    : selectedSellerCategory;
+
+
+            sellerEmptyProducts.style.display =
+                filteredProducts.length === 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        /* =================================
+           CATEGORY FILTER
+           ================================= */
+
+        document
+            .querySelectorAll(".seller-category-button")
+            .forEach(function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .querySelectorAll(
+                                ".seller-category-button"
+                            )
+                            .forEach(function(item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            });
+
+
+                        this.classList.add("active");
+
+
+                        selectedSellerCategory =
+                            this.getAttribute(
+                                "data-category"
+                            );
+
+
+                        displaySellerProducts();
+
+                    }
+                );
+
+            });
+
+
+        /* =================================
+           SEARCH
+           ================================= */
+
+        sellerProductSearch.addEventListener(
+            "input",
+            displaySellerProducts
+        );
+
+
+        /* =================================
+           INITIAL DISPLAY & MYSQL SYNC
+           ================================= */
+
+        displaySellerProducts();
+
+        async function loadProductsFromMySQL() {
+            try {
+                const response = await fetch(`${API_BASE}/api/products`);
+                const data = await response.json();
+                if (data && data.success && Array.isArray(data.products) && data.products.length > 0) {
+                    const dbProducts = data.products.map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        category: p.category,
+                        price: Number(p.price),
+                        seller: p.seller_name || "Urban Wood Studio",
+                        rating: (p.rating !== null && p.rating !== undefined) ? String(p.rating) : "4.5",
+                        reviews: p.reviews_count || 0,
+                        stock: Number(p.stock !== undefined ? p.stock : 10),
+                        description: p.description || "",
+                        image: p.image_url || "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80"
+                    }));
+
+                    dbProducts.forEach(dbItem => {
+                        const existingIdx = sellerProducts.findIndex(p => Number(p.id) === Number(dbItem.id));
+                        if (existingIdx !== -1) {
+                            sellerProducts[existingIdx] = { ...sellerProducts[existingIdx], ...dbItem };
+                        } else {
+                            sellerProducts.unshift(dbItem);
+                        }
+                    });
+
+                    displaySellerProducts();
+                }
+            } catch (err) {
+                console.warn("Could not load products from MySQL:", err);
+            }
+        }
+
+        loadProductsFromMySQL();
+
+    </script>
+
+</body>
+</html>

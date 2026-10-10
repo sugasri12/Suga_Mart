@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Admin Sellers</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-sellers-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+
+            <a href="admin-dashboard.html">
+                ←🏠
+            </a>
+
+            <a href="admin-orders.html">
+                📦
+            </a>
+
+            <a href="admin-profile.html">
+                👤
+            </a>
+
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="products-main">
+
+        <section class="products-intro">
+
+            <p class="eyebrow">
+                ADMIN · SELLERS
+            </p>
+
+            <h2>
+                Manage <span>Sellers</span>
+            </h2>
+
+            <p>
+                View and manage registered SUGA MART
+                sellers.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             SELLER LIST
+             ================================ -->
+
+        <section class="products-section">
+
+            <div class="product-grid" id="adminSellersGrid">
+
+
+                <!-- SELLER 01 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            ACTIVE SELLER
+                        </span>
+
+                        <span class="product-number">
+                            01
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            SUGA MART Furniture Store
+                        </h3>
+
+                        <p>
+                            <strong>Seller:</strong>
+                            SUGA MART Seller
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            seller@sugamart.com
+                        </p>
+
+                        <p>
+                            <strong>Store Category:</strong>
+                            Furniture
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="seller-status">Active</span>
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="seller-status">Pending</span>
+                        </p>
+
+
+                        <div class="product-actions">
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="changeSellerStatus(this, 'Approved')">
+                                Approve
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="changeSellerStatus(this, 'Blocked')">
+                                Block
+                            </button>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- SELLER 02 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            PENDING SELLER
+                        </span>
+
+                        <span class="product-number">
+                            02
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            Classic Home Furniture
+                        </h3>
+
+                        <p>
+                            <strong>Seller:</strong>
+                            Priya Furniture
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            priya.furniture@example.com
+                        </p>
+
+                        <p>
+                            <strong>Store Category:</strong>
+                            Furniture
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            Pending
+                        </p>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="alert('Seller account approved.')"
+                            >
+                                Approve
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="alert('Seller account blocked.')"
+                            >
+                                Block
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                SELLER MANAGEMENT
+            </p>
+
+            <h3>
+                Manage seller accounts with ease.
+            </h3>
+
+            <p>
+                Review seller information and use the
+                Approve or Block options to manage
+                seller accounts.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             BACK TO DASHBOARD
+             ================================ -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="admin-dashboard.html"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const grid = document.getElementById("adminSellersGrid");
+        if (!grid) return;
+
+        try {
+            const res = await fetch(`${API_BASE}/api/admin/users?role=seller`);
+            const data = await res.json();
+
+            if (res.ok && data.success && Array.isArray(data.users) && data.users.length > 0) {
+                grid.innerHTML = "";
+
+                data.users.forEach((seller, idx) => {
+                    const card = document.createElement("article");
+                    card.className = "product-card";
+                    const num = String(idx + 1).padStart(2, "0");
+                    const status = seller.status || "Approved";
+                    const isBlocked = status === "Blocked";
+                    const labelBg = isBlocked ? "#f8e5e2" : "#e5f1e9";
+                    const labelColor = isBlocked ? "#a33a32" : "#176b52";
+                    const labelText = isBlocked ? "BLOCKED SELLER" : "ACTIVE SELLER";
+
+                    card.innerHTML = `
+                        <div class="product-card-top">
+                            <span class="product-label" style="background: ${labelBg}; color: ${labelColor};">
+                                ${labelText}
+                            </span>
+                            <span class="product-number">
+                                ${num}
+                            </span>
+                        </div>
+                        <div class="product-content">
+                            <h3>${seller.name}</h3>
+                            <p><strong>Email:</strong> ${seller.email}</p>
+                            <p><strong>Phone:</strong> ${seller.phone || "N/A"}</p>
+                            <p><strong>Store Category:</strong> Furniture</p>
+                            <p><strong>Status:</strong> <span class="seller-status" style="color: ${labelColor}; font-weight: bold;">${status}</span></p>
+                            <div class="product-actions">
+                                <button
+                                    type="button"
+                                    class="primary-button"
+                                    onclick="updateSellerStatusInDB(this, ${seller.id}, 'Approved')">
+                                    Approve
+                                </button>
+                                <button
+                                    type="button"
+                                    class="secondary-button"
+                                    onclick="updateSellerStatusInDB(this, ${seller.id}, 'Blocked')">
+                                    Block
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        } catch (e) {
+            console.warn("Could not load sellers from MySQL:", e);
+        }
+    });
+
+    async function updateSellerStatusInDB(btn, sellerId, status) {
+        try {
+            const res = await fetch(`${API_BASE}/api/admin/users/${sellerId}/status`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status })
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                const card = btn.closest(".product-card");
+                if (card) {
+                    const label = card.querySelector(".product-label");
+                    const statusSpan = card.querySelector(".seller-status");
+                    const isBlocked = status === "Blocked";
+                    if (label) {
+                        label.textContent = isBlocked ? "BLOCKED SELLER" : "ACTIVE SELLER";
+                        label.style.background = isBlocked ? "#f8e5e2" : "#e5f1e9";
+                        label.style.color = isBlocked ? "#a33a32" : "#176b52";
+                    }
+                    if (statusSpan) {
+                        statusSpan.textContent = status;
+                        statusSpan.style.color = isBlocked ? "#a33a32" : "#176b52";
+                    }
+                }
+                alert(data.message || `Seller status updated to ${status}!`);
+            } else {
+                alert(data.message || "Failed to update seller status.");
+            }
+        } catch (e) {
+            alert("Network error updating seller status.");
+        }
+    }
+    </script>
+
+</body>
+</html>

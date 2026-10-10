@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SUGA MART - Create Buyer Account</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* Remove underline from SUGA MART brand */
+
+        .brand,
+        .brand:hover,
+        .brand:focus,
+        .brand:active {
+            text-decoration: none;
+        }
+
+        .brand h1,
+        .brand p,
+        .brand span {
+            text-decoration: none;
+        }
+
+
+        /* Password field */
+
+        .password-field {
+            position: relative;
+        }
+
+
+        /* Show Password */
+
+        .show-password {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 9px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 12px;
+
+            color: #777267;
+
+            cursor: pointer;
+
+            user-select: none;
+        }
+
+
+        .show-password input {
+            width: 15px;
+
+            height: 15px;
+
+            margin: 0;
+
+            accent-color: #176b52;
+
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="buyer-create-account-page">
+
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <span class="brand-mark">
+                S
+            </span>
+
+            <span class="brand-text">
+
+                <h1>
+                    SUGA MART
+                </h1>
+
+                <span>
+                    FURNITURE MARKETPLACE
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         CREATE ACCOUNT
+         ================================ -->
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+
+            <!-- HEADER -->
+
+            <div class="auth-header">
+
+                <p class="eyebrow">
+                    BUYER PORTAL
+                </p>
+
+                <h2>
+                    Create Your Account
+                </h2>
+
+                <p>
+                    Create your SUGA MART buyer account.
+                </p>
+
+            </div>
+
+
+            <!-- CREATE ACCOUNT FORM -->
+
+            <form
+                id="buyerCreateAccountForm"
+                class="auth-form"
+            >
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="buyerName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="buyerName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="buyerEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="buyerEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="buyerPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="buyerPhone"
+                        placeholder="Enter 10-digit phone number"
+                        maxlength="10"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group password-field">
+
+                    <label for="buyerPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="buyerPassword"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+
+                    <label class="show-password">
+
+                        <input
+                            type="checkbox"
+                            id="showBuyerPassword"
+                        >
+
+                        <span>
+                            Show Password
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group password-field">
+
+                    <label for="buyerConfirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="buyerConfirmPassword"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+
+                    <label class="show-password">
+
+                        <input
+                            type="checkbox"
+                            id="showBuyerConfirmPassword"
+                        >
+
+                        <span>
+                            Show Password
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- CREATE ACCOUNT BUTTON -->
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- MESSAGE -->
+
+            <p
+                id="buyerCreateAccountMessage"
+                class="form-message"
+            ></p>
+
+
+            <!-- LOGIN -->
+
+            <div class="auth-footer-text">
+
+                <p>
+                    Already have an account?
+                </p>
+
+                <a href="buyer-login.html">
+                    Login
+                </a>
+
+            </div>
+
+
+            <!-- BACK TO HOME -->
+
+            <div class="back-link">
+
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+
+            &copy; 2026 SUGA MART
+
+            <span>·</span>
+
+            Furniture Marketplace
+
+        </p>
+
+    </footer>
+
+
+    <!-- ================================
+         SHOW PASSWORD
+         ================================ -->
+
+    <script>
+
+        const showBuyerPassword =
+            document.getElementById("showBuyerPassword");
+
+        const buyerPassword =
+            document.getElementById("buyerPassword");
+
+
+        showBuyerPassword.addEventListener(
+            "change",
+            function () {
+
+                if (this.checked) {
+
+                    buyerPassword.type = "text";
+
+                } else {
+
+                    buyerPassword.type = "password";
+
+                }
+
+            }
+        );
+
+
+        const showBuyerConfirmPassword =
+            document.getElementById("showBuyerConfirmPassword");
+
+        const buyerConfirmPassword =
+            document.getElementById("buyerConfirmPassword");
+
+
+        showBuyerConfirmPassword.addEventListener(
+            "change",
+            function () {
+
+                if (this.checked) {
+
+                    buyerConfirmPassword.type = "text";
+
+                } else {
+
+                    buyerConfirmPassword.type = "password";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

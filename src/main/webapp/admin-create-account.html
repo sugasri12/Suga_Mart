@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SUGA MART - Admin Create Account</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .brand,
+        .brand:hover,
+        .brand:focus,
+        .brand:active {
+            text-decoration: none;
+        }
+
+        .brand h1,
+        .brand p,
+        .brand span {
+            text-decoration: none;
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .show-password {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 9px;
+
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #777267;
+
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .show-password input {
+            width: 15px;
+            height: 15px;
+            margin: 0;
+
+            accent-color: #176b52;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="admin-create-account-page">
+
+
+    <!-- HEADER -->
+
+    <header class="site-header">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <span class="brand-mark">
+                S
+            </span>
+
+            <span class="brand-text">
+
+                <h1>
+                    SUGA MART
+                </h1>
+
+                <span>
+                    FURNITURE MARKETPLACE
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+
+            <div class="auth-header">
+
+                <p class="eyebrow">
+                    ADMIN PORTAL
+                </p>
+
+                <h2>
+                    Create Admin <span>Account</span>
+                </h2>
+
+                <p>
+                    Create an administrator account
+                    for SUGA MART.
+                </p>
+
+            </div>
+
+
+            <!-- CREATE ACCOUNT FORM -->
+
+            <form
+                id="adminCreateAccountForm"
+                class="auth-form"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="adminName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adminName"
+                        placeholder="Enter your name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="adminCreateEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="adminCreateEmail"
+                        placeholder="Enter admin email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="adminPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="adminPhone"
+                        placeholder="Enter 10-digit phone number"
+                        maxlength="10"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group password-field">
+
+                    <label for="adminCreatePassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="adminCreatePassword"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <label class="show-password">
+
+                        <input
+                            type="checkbox"
+                            id="showAdminCreatePassword"
+                        >
+
+                        <span>
+                            Show Password
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group password-field">
+
+                    <label for="adminConfirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="adminConfirmPassword"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <label class="show-password">
+
+                        <input
+                            type="checkbox"
+                            id="showAdminConfirmPassword"
+                        >
+
+                        <span>
+                            Show Password
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- MESSAGE -->
+
+            <p
+                id="adminCreateAccountMessage"
+                class="form-message"
+            ></p>
+
+
+            <!-- LOGIN -->
+
+            <div class="auth-footer-text">
+
+                <p>
+                    Already have an admin account?
+                </p>
+
+                <a href="admin-login.html">
+                    Login
+                </a>
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <div class="back-link">
+
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer">
+
+        <p>
+
+            &copy; 2026 SUGA MART
+
+            <span>·</span>
+
+            Furniture Marketplace
+
+        </p>
+
+    </footer>
+
+
+    <!-- SHOW PASSWORD -->
+
+    <script>
+
+        const showAdminCreatePassword =
+            document.getElementById("showAdminCreatePassword");
+
+        const adminCreatePassword =
+            document.getElementById("adminCreatePassword");
+
+
+        showAdminCreatePassword.addEventListener(
+            "change",
+            function () {
+
+                adminCreatePassword.type =
+                    this.checked ? "text" : "password";
+
+            }
+        );
+
+
+        const showAdminConfirmPassword =
+            document.getElementById("showAdminConfirmPassword");
+
+        const adminConfirmPassword =
+            document.getElementById("adminConfirmPassword");
+
+
+        showAdminConfirmPassword.addEventListener(
+            "change",
+            function () {
+
+                adminConfirmPassword.type =
+                    this.checked ? "text" : "password";
+
+            }
+        );
+
+    </script>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

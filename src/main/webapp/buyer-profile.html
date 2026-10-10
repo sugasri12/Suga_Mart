@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - My Profile</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="buyer-profile-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="buyer-dashboard.html">←🏠</a>
+            <a href="buyer-products.html" class="active">🛍️</a>
+            <a href="buyer-wishlist.html" title="Wishlist">♡</a>
+            <a href="buyer-cart.html" title="Cart">🛒</a>
+            <a href="buyer-orders.html" title="Orders">📦</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="profile-main">
+
+        <!-- PAGE INTRO -->
+
+        <section class="profile-intro">
+
+            <p class="eyebrow">
+                YOUR ACCOUNT
+            </p>
+
+            <h2>
+                My <span>Profile</span>
+            </h2>
+
+            <p>
+                Manage your SUGA MART buyer account information.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             ACCOUNT INFORMATION
+             ================================ -->
+
+        <section class="profile-card">
+
+            <div class="profile-card-heading">
+
+                <p class="eyebrow">
+                    ACCOUNT
+                </p>
+
+                <h3>
+                    Account Information
+                </h3>
+
+            </div>
+
+
+            <div class="profile-information-grid">
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Name
+                    </span>
+
+                    <strong id="profileName">
+                        Suga
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong data-account-email>
+                        suga@sugamart.com
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Account Type
+                    </span>
+
+                    <strong>
+                        Buyer
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             DELIVERY ADDRESS
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                DELIVERY
+            </p>
+
+            <h3>
+                Delivery Address
+            </h3>
+
+
+            <div data-delivery-address>
+
+                <p>
+                    No delivery address saved yet.
+                </p>
+
+                <p>
+                    Your delivery address will appear here
+                    after you complete checkout.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             ACCOUNT ACTIONS
+             ================================ -->
+
+        <section class="profile-card">
+
+            <div class="profile-card-heading">
+
+                <p class="eyebrow">
+                    MANAGE ACCOUNT
+                </p>
+
+                <h3>
+                    Account Actions
+                </h3>
+
+            </div>
+
+            <div class="profile-actions">
+
+                <a
+                    href="buyer-edit-profile.html"
+                    class="secondary-button"
+                >
+                    ✏️ Edit Profile
+                </a>
+
+                <a
+                    href="buyer-orders.html"
+                    class="secondary-button"
+                >
+                    My Orders
+                </a>
+
+                <a
+                    href="buyer-wishlist.html"
+                    class="secondary-button"
+                >
+                    My Wishlist
+                </a>
+
+                <a
+                    href="buyer-cart.html"
+                    class="secondary-button"
+                >
+                    My Cart
+                </a>
+
+                <a
+                    href="buyer-forgot-password.html"
+                    class="secondary-button"
+                >
+                    Change / Reset Password
+                </a>
+
+                <button
+                    type="button"
+                    class="logout-button"
+                    data-logout
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- BACK TO DASHBOARD -->
+
+        <div class="page-back-link">
+
+            <a href="buyer-dashboard.html">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const email = localStorage.getItem("sugaMartEmail");
+        if (!email) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/api/users/profile/${encodeURIComponent(email)}`);
+            const data = await response.json();
+
+            if (response.ok && data.success && data.user) {
+                const u = data.user;
+                const nameEl = document.getElementById("profileName");
+                if (nameEl) nameEl.textContent = u.name;
+
+                const emailEl = document.querySelector("[data-account-email]");
+                if (emailEl) emailEl.textContent = u.email;
+
+                if (u.address || u.city) {
+                    const addrEl = document.querySelector("[data-delivery-address]");
+                    if (addrEl) {
+                        addrEl.innerHTML = `
+                            <p><strong>${u.name}</strong></p>
+                            <p>Phone: ${u.phone}</p>
+                            <p>${u.address || ""}</p>
+                            <p>${u.city || ""}</p>
+                        `;
+                    }
+                }
+            }
+        } catch (err) {
+            console.warn("Could not load profile from MySQL:", err);
+        }
+    });
+    </script>
+
+</body>
+</html>

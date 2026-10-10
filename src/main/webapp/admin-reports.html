@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Admin Reports</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-reports-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+
+            <a href="admin-dashboard.html">
+                ←🏠
+            </a>
+
+            <a href="admin-profile.html">
+                👤
+            </a>
+
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="dashboard-main">
+
+        <section class="dashboard-intro">
+
+            <p class="eyebrow">
+                ADMIN · REPORTS
+            </p>
+
+            <h2>
+                Marketplace <span>Reports</span>
+            </h2>
+
+            <p>
+                View basic SUGA MART marketplace
+                statistics and sales information.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             STATISTICS
+             ================================ -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-grid">
+
+
+                <!-- TOTAL USERS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-number">
+                        01
+                    </div>
+
+                    <div class="dashboard-card-content">
+
+                        <h3>
+                            Total Users
+                        </h3>
+
+                        <p class="report-value" id="reportTotalUsers">
+                            25
+                        </p>
+
+                        <p>
+                            Registered buyers on the
+                            marketplace.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TOTAL SELLERS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-number">
+                        02
+                    </div>
+
+                    <div class="dashboard-card-content">
+
+                        <h3>
+                            Total Sellers
+                        </h3>
+
+                        <p class="report-value" id="reportTotalSellers">
+                            8
+                        </p>
+
+                        <p>
+                            Active and registered sellers.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TOTAL PRODUCTS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-number">
+                        03
+                    </div>
+
+                    <div class="dashboard-card-content">
+
+                        <h3>
+                            Total Products
+                        </h3>
+
+                        <p class="report-value" id="reportTotalProducts">
+                            42
+                        </p>
+
+                        <p>
+                            Furniture products available
+                            in the marketplace.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TOTAL ORDERS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-number">
+                        04
+                    </div>
+
+                    <div class="dashboard-card-content">
+
+                        <h3>
+                            Total Orders
+                        </h3>
+
+                        <p class="report-value" id="reportTotalOrders">
+                            56
+                        </p>
+
+                        <p>
+                            Orders received from customers.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- COMPLETED ORDERS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-number">
+                        05
+                    </div>
+
+                    <div class="dashboard-card-content">
+
+                        <h3>
+                            Completed Orders
+                        </h3>
+
+                        <p class="report-value" id="reportCompletedOrders">
+                            38
+                        </p>
+
+                        <p>
+                            Successfully delivered orders.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PENDING ORDERS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-number">
+                        06
+                    </div>
+
+                    <div class="dashboard-card-content">
+
+                        <h3>
+                            Pending Orders
+                        </h3>
+
+                        <p class="report-value" id="reportPendingOrders">
+                            18
+                        </p>
+
+                        <p>
+                            Orders that are still being
+                            processed.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             SALES SUMMARY
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                SALES SUMMARY
+            </p>
+
+            <h3>
+                SUGA MART Sales Overview
+            </h3>
+
+            <div class="report-summary">
+
+                <p>
+                    <strong>Total Sales:</strong>
+                    <span id="reportTotalSales">₹8,75,000</span>
+                </p>
+
+                <p>
+                    <strong>This Month:</strong>
+                    <span id="reportMonthlySales">₹1,45,000</span>
+                </p>
+
+                <p>
+                    <strong>Average Order Value:</strong>
+                    <span id="reportAvgOrderValue">₹15,625</span>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             BACK TO DASHBOARD
+             ================================ -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="admin-dashboard.html"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

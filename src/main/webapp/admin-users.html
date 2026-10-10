@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Admin Users</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-users-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+
+            <a href="admin-dashboard.html">
+                ←🏠
+            </a>
+
+            <a href="admin-profile.html">
+                👤
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="products-main">
+
+        <section class="products-intro">
+
+            <p class="eyebrow">
+                ADMIN · USERS
+            </p>
+
+            <h2>
+                Manage <span>Users</span>
+            </h2>
+
+            <p>
+                View and manage registered SUGA MART
+                buyers.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             USER LIST
+             ================================ -->
+
+        <section class="products-section">
+
+            <div class="product-grid" id="adminUsersGrid">
+
+
+                <!-- USER 01 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            ACTIVE USER
+                        </span>
+
+                        <span class="product-number">
+                            01
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            Suga
+                        </h3>
+
+                        <p>
+                            <strong>Email:</strong>
+                            suga@sugamart.com
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            9876543210
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            Active
+                        </p>
+
+
+                        <div class="product-actions">
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="changeUserStatus(this, 'Active')">
+                                Activate
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="changeUserStatus(this, 'Blocked')">
+                                Block
+                            </button>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- USER 02 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            ACTIVE USER
+                        </span>
+
+                        <span class="product-number">
+                            02
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            Priya
+                        </h3>
+
+                        <p>
+                            <strong>Email:</strong>
+                            priya@example.com
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            9876501234
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="user-status active-status">Active</span>
+                        </p>
+
+
+                        <div class="product-actions">
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="changeUserStatus(this, 'Active')">
+                                Activate
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="changeUserStatus(this, 'Blocked')">
+                                Block
+                            </button>
+                        </div>
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                USER MANAGEMENT
+            </p>
+
+            <h3>
+                Keep buyer accounts organized and secure.
+            </h3>
+
+            <p>
+                Use the Activate and Block options to
+                manage registered buyer accounts.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             BACK TO DASHBOARD
+             ================================ -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="admin-dashboard.html"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const grid = document.getElementById("adminUsersGrid");
+        if (!grid) return;
+
+        try {
+            const res = await fetch(`${API_BASE}/api/admin/users?role=buyer`);
+            const data = await res.json();
+
+            if (res.ok && data.success && Array.isArray(data.users) && data.users.length > 0) {
+                grid.innerHTML = "";
+
+                data.users.forEach((user, idx) => {
+                    const card = document.createElement("article");
+                    card.className = "product-card";
+                    const num = String(idx + 1).padStart(2, "0");
+                    const status = user.status || "Active";
+                    const isBlocked = status === "Blocked";
+                    const labelBg = isBlocked ? "#f8e5e2" : "#e5f1e9";
+                    const labelColor = isBlocked ? "#a33a32" : "#176b52";
+                    const labelText = isBlocked ? "BLOCKED USER" : "ACTIVE USER";
+
+                    card.innerHTML = `
+                        <div class="product-card-top">
+                            <span class="product-label" style="background: ${labelBg}; color: ${labelColor};">
+                                ${labelText}
+                            </span>
+                            <span class="product-number">
+                                ${num}
+                            </span>
+                        </div>
+                        <div class="product-content">
+                            <h3>${user.name}</h3>
+                            <p><strong>Email:</strong> ${user.email}</p>
+                            <p><strong>Phone:</strong> ${user.phone || "N/A"}</p>
+                            <p><strong>City:</strong> ${user.city || "Not Specified"}</p>
+                            <p><strong>Status:</strong> <span class="user-status" style="color: ${labelColor}; font-weight: bold;">${status}</span></p>
+                            <div class="product-actions">
+                                <button
+                                    type="button"
+                                    class="primary-button"
+                                    onclick="updateUserStatusInDB(this, ${user.id}, 'Active')">
+                                    Activate
+                                </button>
+                                <button
+                                    type="button"
+                                    class="secondary-button"
+                                    onclick="updateUserStatusInDB(this, ${user.id}, 'Blocked')">
+                                    Block
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        } catch (e) {
+            console.warn("Could not load users from MySQL:", e);
+        }
+    });
+
+    async function updateUserStatusInDB(btn, userId, status) {
+        try {
+            const res = await fetch(`${API_BASE}/api/admin/users/${userId}/status`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status })
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                const card = btn.closest(".product-card");
+                if (card) {
+                    const label = card.querySelector(".product-label");
+                    const statusSpan = card.querySelector(".user-status");
+                    const isBlocked = status === "Blocked";
+                    if (label) {
+                        label.textContent = isBlocked ? "BLOCKED USER" : "ACTIVE USER";
+                        label.style.background = isBlocked ? "#f8e5e2" : "#e5f1e9";
+                        label.style.color = isBlocked ? "#a33a32" : "#176b52";
+                    }
+                    if (statusSpan) {
+                        statusSpan.textContent = status;
+                        statusSpan.style.color = isBlocked ? "#a33a32" : "#176b52";
+                    }
+                }
+                alert(data.message || `User status updated to ${status}!`);
+            } else {
+                alert(data.message || "Failed to update user status.");
+            }
+        } catch (e) {
+            alert("Network error updating user status.");
+        }
+    }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUGA'S MART - Furniture Products</title>
+<link rel="stylesheet" href="style.css">
+<script src="api-config.js"></script>
+
+<style>
+.buyer-products-page {
+    background: #f7f3ea;
+    color: #26352f;
+}
+
+.buyer-products-page .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.buyer-products-page .main-nav a {
+    text-decoration: none;
+}
+
+.products-main {
+    width: min(1400px, 94%);
+    margin: 0 auto;
+    padding: 55px 0 70px;
+}
+
+.products-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.products-intro .eyebrow,
+.search-heading .eyebrow,
+.category-section .eyebrow {
+    color: #9a7237;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+}
+
+.products-intro h1 {
+    color: #176b52;
+    font-size: clamp(32px, 5vw, 52px);
+    margin: 0 0 15px;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.products-intro p {
+    color: #66716b;
+    line-height: 1.7;
+}
+
+.product-search-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: #fffdf7;
+    border: 1px solid #ddd3c0;
+    border-radius: 24px 8px 24px 8px;
+    padding: 25px 30px;
+    margin-bottom: 35px;
+}
+
+.search-heading {
+    flex: 1;
+}
+
+.search-heading h3,
+.category-section h3,
+.category-title h3 {
+    color: #176b52;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.search-heading h3 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.search-box {
+    position: relative;
+    width: min(430px, 100%);
+}
+
+.search-box .search-icon {
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #176b52;
+}
+
+.search-box input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 18px 15px 48px;
+    border: 1px solid #cfc5b2;
+    border-radius: 14px;
+    background: #fff;
+    font-size: 15px;
+    outline: none;
+}
+
+.category-section {
+    margin-bottom: 35px;
+}
+
+.category-section h3 {
+    font-size: 28px;
+    margin: 0 0 20px;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-button {
+    border: 1px solid #cfc5b2;
+    background: #fffdf7;
+    color: #385149;
+    padding: 11px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.category-button.active {
+    background: #176b52;
+    border-color: #176b52;
+    color: #fff;
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.category-title h3 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.product-card {
+    background: #fffdf7;
+    border: 1px solid #ddd3c0;
+    border-radius: 24px 8px 24px 8px;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(44, 58, 49, 0.12);
+}
+
+.product-image-wrap {
+    position: relative;
+    height: 245px;
+    background: #ebe6dc;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.product-image-primary {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+}
+
+.product-image-hover {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+}
+
+.product-card:hover .product-image-primary {
+    opacity: 0;
+}
+
+.product-card:hover .product-image-hover {
+    opacity: 1;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.04);
+}
+
+.category-badge {
+    position: absolute;
+    z-index: 3;
+    top: 14px;
+    left: 14px;
+    background: rgba(255, 253, 247, 0.95);
+    color: #176b52;
+    padding: 7px 11px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.wishlist-button {
+    position: absolute;
+    z-index: 4;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 253, 247, 0.96);
+    color: #176b52;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.wishlist-button.active {
+    color: #9a7237;
+}
+
+.product-content {
+    padding: 20px;
+}
+
+.product-name {
+    color: #26352f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    line-height: 1.25;
+    margin: 0 0 9px;
+}
+
+.product-description {
+    color: #707873;
+    font-size: 13px;
+    line-height: 1.55;
+    min-height: 42px;
+    margin-bottom: 12px;
+}
+
+.product-seller {
+    font-size: 12px;
+    color: #77736d;
+}
+
+.product-seller strong {
+    color: #176b52;
+}
+
+.product-rating {
+    color: #9a7237;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.review-count {
+    color: #77736d;
+    margin-left: 4px;
+}
+
+.product-price {
+    color: #176b52;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.product-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.product-actions a,
+.product-actions button {
+    min-height: 43px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 8px;
+}
+
+.view-details-button {
+    background: transparent;
+    border: 1px solid #aeb7b1;
+    color: #385149;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-cart-button {
+    background: #9a7237;
+    border: 1px solid #9a7237;
+    color: #fff;
+}
+
+.buy-now-button {
+    grid-column: 1 / -1;
+    background: #176b52;
+    border: 1px solid #176b52;
+    color: #fff;
+}
+
+.product-empty-message {
+    display: none;
+    text-align: center;
+    background: #fffdf7;
+    border: 1px solid #ddd3c0;
+    padding: 45px;
+    border-radius: 20px;
+    color: #77736d;
+}
+
+.page-back-link {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.page-back-link a {
+    color: #176b52;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+@media (max-width: 1150px) {
+    .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .product-search-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .products-main {
+        width: 92%;
+        padding-top: 35px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image-wrap {
+        height: 250px;
+    }
+
+    .category-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+
+/* =====================================
+   SUGA MART - PRODUCT REVIEWS
+   ===================================== */
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    color: #9a7237;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.product-rating .rating-stars {
+    letter-spacing: 1px;
+    color: #9a7237;
+}
+
+.product-rating .review-count {
+    color: #77736d;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+.review-section {
+    margin-top: 30px;
+    padding: 25px;
+    background: #fffdf7;
+    border: 1px solid #ddd3c0;
+    border-radius: 20px 8px 20px 8px;
+}
+
+.review-section h3 {
+    color: #176b52;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.review-average {
+    color: #9a7237;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.review-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee5d6;
+}
+
+.review-item p {
+    color: #66716b;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.review-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.review-form select,
+.review-form textarea,
+.review-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #cfc5b2;
+    border-radius: 10px;
+    background: #fff;
+    color: #26352f;
+    font: inherit;
+}
+
+.review-form button {
+    padding: 12px 18px;
+    background: #176b52;
+    border: 1px solid #176b52;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.review-form button:hover {
+    background: #125640;
+}
+
+@media (max-width: 560px) {
+    .review-section {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body class="buyer-products-page">
+
+<header class="site-header">
+    <div class="brand">
+        <div class="brand-mark">S</div>
+        <div class="brand-text">
+            <strong>SUGA'S MART</strong>
+            <span>FURNITURE MARKETPLACE</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a href="buyer-dashboard.html">←🏠</a>
+        <a href="buyer-products.html" class="active">🛍️</a>
+        <a href="buyer-wishlist.html" title="Wishlist">♡</a>
+        <a href="buyer-cart.html" title="Cart">🛒</a>
+        <a href="buyer-orders.html" title="Orders">📦</a>
+        <a href="buyer-profile.html" title="Profile">👤</a>
+    </nav>
+</header>
+
+<main class="products-main">
+
+    <section class="products-intro">
+        <p class="eyebrow">SUGA MART FURNITURE COLLECTION</p>
+        <h1>Find Furniture You Love</h1>
+        <p>
+            Explore thoughtfully selected furniture for every room,
+            workspace and outdoor space.
+        </p>
+    </section>
+
+    <section class="product-search-section">
+        <div class="search-heading">
+            <p class="eyebrow">FIND YOUR FURNITURE</p>
+            <h3>Explore our collection</h3>
+        </div>
+
+        <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input
+                type="text"
+                id="productSearch"
+                placeholder="Search furniture..."
+                aria-label="Search furniture"
+            >
+        </div>
+    </section>
+
+    <section class="category-section">
+        <p class="eyebrow">SHOP BY CATEGORY</p>
+        <h3>Choose your space</h3>
+
+        <div class="category-buttons">
+            <button class="category-button active" data-category="all">
+                All Furniture
+            </button>
+
+            <button class="category-button" data-category="Living Room">
+                🛋️ Living Room
+            </button>
+
+            <button class="category-button" data-category="Bedroom">
+                🛏️ Bedroom
+            </button>
+
+            <button class="category-button" data-category="Dining Room">
+                🍽️ Dining Room
+            </button>
+
+            <button class="category-button" data-category="Study & Office">
+                💻 Study & Office
+            </button>
+
+            <button class="category-button" data-category="Outdoor">
+                🌿 Outdoor
+            </button>
+
+            <button class="category-button" data-category="Storage">
+                🗄️ Storage
+            </button>
+        </div>
+    </section>
+
+    <section class="products-section">
+
+        <div class="category-title">
+            <h3 id="selectedCategoryTitle">All Furniture</h3>
+            <span id="productCount">300 Products</span>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+
+        <div class="product-empty-message" id="emptyMessage">
+            No furniture found.
+        </div>
+
+    </section>
+
+    <div class="page-back-link">
+        <a href="buyer-dashboard.html">← Back to Dashboard</a>
+    </div>
+
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 SUGA MART · Furniture Marketplace</p>
+</footer>
+
+<script>
+/*
+=========================================================
+PRODUCT IMAGE SYSTEM
+=========================================================
+
+Every furniture type has its own image pair:
+1. Main product image
+2. Hover product image
+
+The product generator selects images by the actual
+furniture item type, so:
+- Sofa products use sofa images.
+- Table products use table images.
+- Bed products use bedroom/bed images.
+- Desk products use office/desk images.
+- Cabinet products use storage/cabinet images.
+
+The image URLs are direct Unsplash image URLs.
+*/
+
+const imageCatalog = {
+
+    "Lounge Sofa": [
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1550226891-ef816aed4a98?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Accent Chair": [
+        "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Coffee Table": [
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Side Table": [
+        "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1550254478-ead40cc54513?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "TV Console": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Recliner Chair": [
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Console Table": [
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Living Ottoman": [
+        "https://images.unsplash.com/photo-1550226891-ef816aed4a98?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Lounge Bench": [
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Display Shelf": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bed Frame": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bedside Table": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Dressing Table": [
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bedroom Bench": [
+        "https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Wardrobe": [
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Drawer Chest": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bedside Cabinet": [
+        "https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Vanity Table": [
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bedroom Stool": [
+        "https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Headboard": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Dining Table": [
+        "https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Dining Chair": [
+        "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Sideboard": [
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Buffet Cabinet": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bar Stool": [
+        "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Dining Bench": [
+        "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Serving Cabinet": [
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Kitchen Dining Table": [
+        "https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Display Sideboard": [
+        "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Dining Console": [
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Study Desk": [
+        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Office Chair": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bookshelf": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Computer Desk": [
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Writing Desk": [
+        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "File Cabinet": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Study Chair": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Office Table": [
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Storage Rack": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Desk Organizer": [
+        "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Garden Sofa": [
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Patio Chair": [
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Garden Table": [
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Outdoor Bench": [
+        "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Swing Chair": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Patio Lounge": [
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Outdoor Stool": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bistro Table": [
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Garden Bench": [
+        "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Balcony Chair": [
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Storage Cabinet": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Bookshelf Unit": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Shoe Rack": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Display Cabinet": [
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Side Cabinet": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Wall Shelf": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Storage Unit": [
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Drawer Cabinet": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Corner Shelf": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85"
+    ],
+
+    "Utility Cabinet": [
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85"
+    ]
+};
+
+const productNames = [
+    "Arden", "Haven", "Luna", "Willow", "Nora",
+    "Mira", "Elara", "Nova", "Cedar", "Oak",
+    "Aura", "Olive", "Maple", "Siena", "Riva",
+    "Aspen", "Cove", "Milo", "Vera", "Eden",
+    "Aster", "Iris", "Pearl", "Rhea", "Zara",
+    "Ayla", "Kiara", "Tara", "Meera", "Anya",
+    "Diya", "Ivy", "Hazel", "Ruby", "Sage",
+    "Skye", "Clara", "Maya", "Leona", "Freya",
+    "Alina", "Sora", "Amara", "Nyla", "Elise",
+    "Aurelia", "Seren", "Vanya", "Thea", "Lyra"
+];
+
+const categories = [
+    {
+        name: "Living Room",
+        items: [
+            "Lounge Sofa", "Accent Chair", "Coffee Table",
+            "Side Table", "TV Console", "Recliner Chair",
+            "Console Table", "Living Ottoman", "Lounge Bench",
+            "Display Shelf"
+        ]
+    },
+    {
+        name: "Bedroom",
+        items: [
+            "Bed Frame", "Bedside Table", "Dressing Table",
+            "Bedroom Bench", "Wardrobe", "Drawer Chest",
+            "Bedside Cabinet", "Vanity Table", "Bedroom Stool",
+            "Headboard"
+        ]
+    },
+    {
+        name: "Dining Room",
+        items: [
+            "Dining Table", "Dining Chair", "Sideboard",
+            "Buffet Cabinet", "Bar Stool", "Dining Bench",
+            "Serving Cabinet", "Kitchen Dining Table",
+            "Display Sideboard", "Dining Console"
+        ]
+    },
+    {
+        name: "Study & Office",
+        items: [
+            "Study Desk", "Office Chair", "Bookshelf",
+            "Computer Desk", "Writing Desk", "File Cabinet",
+            "Study Chair", "Office Table", "Storage Rack",
+            "Desk Organizer"
+        ]
+    },
+    {
+        name: "Outdoor",
+        items: [
+            "Garden Sofa", "Patio Chair", "Garden Table",
+            "Outdoor Bench", "Swing Chair", "Patio Lounge",
+            "Outdoor Stool", "Bistro Table", "Garden Bench",
+            "Balcony Chair"
+        ]
+    },
+    {
+        name: "Storage",
+        items: [
+            "Storage Cabinet", "Bookshelf Unit", "Shoe Rack",
+            "Display Cabinet", "Side Cabinet", "Wall Shelf",
+            "Storage Unit", "Drawer Cabinet", "Corner Shelf",
+            "Utility Cabinet"
+        ]
+    }
+];
+
+const sellers = [
+    "Urban Wood Studio",
+    "Modern Home Furnishings",
+    "Classic Comfort Furniture",
+    "Elegant Living Store",
+    "WoodCraft Gallery",
+    "HomeNest Furnitures",
+    "GreenWood Designs",
+    "Royal Oak Furniture",
+    "Cozy Corner Furnishings",
+    "SUGA Premium Homes"
+];
+
+const descriptions = [
+    "Beautifully designed furniture made for everyday comfort and modern homes.",
+    "A stylish and practical furniture piece crafted with quality materials.",
+    "Elegant design with a comfortable finish that suits modern interiors.",
+    "Premium furniture created to bring comfort, style and functionality.",
+    "A durable and attractive choice for creating a warm and welcoming space."
+];
+
+const products = [];
+let productId = 1;
+
+categories.forEach(function(category) {
+
+    for (let i = 0; i < 50; i++) {
+
+        const itemType =
+            category.items[i % category.items.length];
+
+        const name =
+            productNames[i] + " " + itemType;
+
+        const images =
+            imageCatalog[itemType];
+
+        const primaryImage =
+            images[0];
+
+        const hoverImage =
+            images[1];
+
+        products.push({
+            id: productId,
+            name: name,
+            itemType: itemType,
+            category: category.name,
+            price: 7500 + ((productId * 1375) % 45000),
+            seller: sellers[i % sellers.length],
+            rating: (4 + ((productId % 10) / 10)).toFixed(1),
+            reviews: 25 + ((productId * 17) % 480),
+            description: descriptions[i % descriptions.length],
+            image: primaryImage,
+            hoverImage: hoverImage
+        });
+
+        productId++;
+    }
+});
+
+const productGrid =
+    document.getElementById("productGrid");
+
+const productSearch =
+    document.getElementById("productSearch");
+
+const productCount =
+    document.getElementById("productCount");
+
+const selectedCategoryTitle =
+    document.getElementById("selectedCategoryTitle");
+
+const emptyMessage =
+    document.getElementById("emptyMessage");
+
+let selectedCategory = "all";
+
+function getCart() {
+
+    try {
+        return JSON.parse(
+            localStorage.getItem("sugaMartCart")
+        ) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveCart(cart) {
+    localStorage.setItem(
+        "sugaMartCart",
+        JSON.stringify(cart)
+    );
+}
+
+function addToCart(product) {
+
+    const cart = getCart();
+
+    const existing =
+        cart.find(function(item) {
+            return String(item.id) === String(product.id);
+        });
+
+    if (existing) {
+
+        existing.quantity =
+            Math.max(1, Number(existing.quantity) || 1) + 1;
+
+        existing.image = product.image;
+        existing.hoverImage = product.hoverImage;
+        existing.seller = product.seller;
+
+    } else {
+
+        cart.push({
+            id: product.id,
+            name: product.name,
+            itemType: product.itemType,
+            price: product.price,
+            image: product.image,
+            hoverImage: product.hoverImage,
+            seller: product.seller,
+            quantity: 1
+        });
+    }
+
+    saveCart(cart);
+
+    
+}
+
+function toggleWishlist(button, product) {
+
+    let wishlist = [];
+
+    try {
+        wishlist =
+            JSON.parse(
+                localStorage.getItem("sugaMartWishlist")
+            ) || [];
+    } catch (error) {
+        wishlist = [];
+    }
+
+    const index =
+        wishlist.findIndex(function(item) {
+            return String(item.id) === String(product.id);
+        });
+
+    if (index >= 0) {
+
+        wishlist.splice(index, 1);
+        button.classList.remove("active");
+        button.innerHTML = "♡";
+
+    } else {
+
+        wishlist.push({
+            id: product.id,
+            name: product.name,
+            itemType: product.itemType,
+            price: product.price,
+            image: product.image,
+            hoverImage: product.hoverImage,
+            seller: product.seller
+        });
+
+        button.classList.add("active");
+        button.innerHTML = "♥";
+    }
+
+    localStorage.setItem(
+        "sugaMartWishlist",
+        JSON.stringify(wishlist)
+    );
+}
+
+function buyNow(product) {
+
+    localStorage.setItem(
+        "sugaMartBuyNow",
+        JSON.stringify({
+            id: product.id,
+            name: product.name,
+            itemType: product.itemType,
+            price: product.price,
+            image: product.image,
+            hoverImage: product.hoverImage,
+            seller: product.seller,
+            quantity: 1
+        })
+    );
+
+    window.location.href = "buyer-checkout.html";
+}
+
+function createProductCard(product) {
+
+    const card =
+        document.createElement("article");
+
+    card.className = "product-card";
+
+    const imgSrc = product.image || product.image_url || "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80";
+    const hoverSrc = product.hoverImage || imgSrc;
+    const sellerName = product.seller || product.seller_name || "Urban Wood Studio";
+    const numPrice = Number(product.price) || 0;
+    const numRating = Number(product.rating) || 4.5;
+    const reviewsCount = product.reviews !== undefined ? product.reviews : (product.reviews_count || 0);
+
+    card.innerHTML = `
+        <div class="product-image-wrap">
+
+            <img
+                class="product-image product-image-primary"
+                src="${imgSrc}"
+                alt="${product.name}"
+                loading="lazy"
+            >
+
+            <img
+                class="product-image product-image-hover"
+                src="${hoverSrc}"
+                alt="${product.name} alternate view"
+                loading="lazy"
+            >
+
+            <span class="category-badge">
+                ${product.category}
+            </span>
+
+            <button
+                class="wishlist-button"
+                type="button"
+                title="Add to Wishlist"
+                aria-label="Add ${product.name} to Wishlist"
+            >
+                ♡
+            </button>
+
+        </div>
+
+        <div class="product-content">
+
+            <h3 class="product-name">
+                ${product.name}
+            </h3>
+
+            <p class="product-description">
+                ${product.description}
+            </p>
+
+            <p class="product-seller">
+                Seller:
+                <strong>${sellerName}</strong>
+            </p>
+
+            
+            <div class="product-rating">
+                <span class="rating-stars" aria-label="${numRating} out of 5 stars">${"★".repeat(Math.round(numRating))}${"☆".repeat(5 - Math.round(numRating))}</span>
+
+                <span class="review-count">
+                    ${numRating}
+                    (${reviewsCount} reviews)
+                </span>
+            </div>
+
+            <div class="product-price">
+                ₹${numPrice.toLocaleString("en-IN")}
+            </div>
+
+            <div class="product-actions">
+
+                <a
+                    href="buyer-product-details.html?id=${product.id}"
+                    class="view-details-button"
+                >
+                    View Details
+                </a>
+
+                <button
+                    type="button"
+                    class="add-cart-button"
+                    data-product-id="${product.id}"
+                >
+                    Add to Cart
+                </button>
+
+                <button
+                    type="button"
+                    class="buy-now-button"
+                >
+                    Buy Now
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    // Add to Cart is handled by the inline button action above.
+    // This avoids event-listener conflicts when product cards are rebuilt.
+
+    card
+        .querySelector(".buy-now-button")
+        .addEventListener("click", function() {
+            buyNow(product);
+        });
+
+    card
+        .querySelector(".wishlist-button")
+        .addEventListener("click", function() {
+            toggleWishlist(this, product);
+        });
+
+    return card;
+}
+
+// Reliable Add to Cart handler using event delegation.
+// Product cards are recreated during search/category filtering, so one
+// listener on the product grid handles every current and future card.
+productGrid.addEventListener("click", function(event) {
+
+    const button = event.target.closest(".add-cart-button");
+
+    if (!button) {
+        return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const productId = button.getAttribute("data-product-id");
+
+    const product = products.find(function(item) {
+        return String(item.id) === String(productId);
+    });
+
+    if (!product) {
+        console.error("Product not found:", productId);
+        return;
+    }
+
+    addToCart(product);
+
+    button.textContent = "Added ✓";
+    button.disabled = true;
+
+    setTimeout(function() {
+        button.textContent = "Add to Cart";
+        button.disabled = false;
+    }, 1000);
+
+    console.log("Cart updated:", product.name);
+});
+
+function displayProducts() {
+
+    const searchText =
+        productSearch.value.trim().toLowerCase();
+
+    const filtered =
+        products.filter(function(product) {
+
+            const categoryMatch =
+                selectedCategory === "all" ||
+                product.category === selectedCategory;
+
+            const itemTypeStr = (product.itemType || product.category || "").toLowerCase();
+            const sellerStr = (product.seller || product.seller_name || "").toLowerCase();
+
+            const searchMatch =
+                product.name.toLowerCase().includes(searchText) ||
+                itemTypeStr.includes(searchText) ||
+                product.category.toLowerCase().includes(searchText) ||
+                sellerStr.includes(searchText);
+
+            return categoryMatch && searchMatch;
+        });
+
+    productGrid.innerHTML = "";
+
+    filtered.forEach(function(product) {
+        productGrid.appendChild(
+            createProductCard(product)
+            
+        );
+    });
+
+    productCount.textContent =
+        filtered.length + " Products";
+
+    selectedCategoryTitle.textContent =
+        selectedCategory === "all"
+            ? "All Furniture"
+            : selectedCategory;
+
+    emptyMessage.style.display =
+        filtered.length === 0
+            ? "block"
+            : "none";
+}
+
+document
+    .querySelectorAll(".category-button")
+    .forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            document
+                .querySelectorAll(".category-button")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+            this.classList.add("active");
+
+            selectedCategory =
+                this.getAttribute("data-category");
+
+            displayProducts();
+        });
+    });
+
+productSearch.addEventListener(
+    "input",
+    displayProducts
+);
+
+displayProducts();
+
+// Fetch live products from MySQL Backend
+async function fetchProductsFromMySQL() {
+    try {
+        const response = await fetch(`${API_BASE}/api/products`);
+        const data = await response.json();
+
+        if (data && data.success && Array.isArray(data.products) && data.products.length > 0) {
+            const dbProducts = data.products.map(p => ({
+                id: p.id,
+                name: p.name,
+                category: p.category,
+                itemType: p.category,
+                price: Number(p.price),
+                seller: p.seller_name || "Urban Wood Studio",
+                sellerEmail: p.seller_email || "",
+                rating: (p.rating !== null && p.rating !== undefined) ? Number(p.rating).toFixed(1) : "4.5",
+                reviews: p.reviews_count !== undefined ? Number(p.reviews_count) : 0,
+                description: p.description || "",
+                stock: Number(p.stock || 10),
+                image: p.image_url || "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80",
+                hoverImage: p.image_url || "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80"
+            }));
+
+            // Sync MySQL database products into current marketplace
+            dbProducts.forEach(dbItem => {
+                const existingIdx = products.findIndex(p => Number(p.id) === Number(dbItem.id));
+                if (existingIdx !== -1) {
+                    products[existingIdx] = { ...products[existingIdx], ...dbItem };
+                } else {
+                    products.unshift(dbItem);
+                }
+            });
+
+            displayProducts();
+        }
+    } catch (error) {
+        console.warn("Could not load products from MySQL, using catalog ratings/products.");
+    }
+}
+
+// Fetch live review summaries from backend so cards show real ratings from MySQL
+async function fetchReviewSummaries() {
+    try {
+        const response = await fetch(`${API_BASE}/api/reviews/summary/all`);
+        const data = await response.json();
+
+        if (data && data.success && Array.isArray(data.summaries)) {
+            data.summaries.forEach(function(item) {
+                const target = products.find(function(p) {
+                    return Number(p.id) === Number(item.product_id);
+                });
+
+                if (target) {
+                    target.rating = Number(item.average_rating).toFixed(1);
+                    target.reviews = Number(item.total_reviews);
+                }
+            });
+
+            displayProducts();
+        }
+    } catch (error) {
+        console.log("Could not load review summaries, using catalog ratings.");
+    }
+}
+
+fetchProductsFromMySQL().then(() => {
+    fetchReviewSummaries();
+});
+</script>
+
+</body>
+</html>

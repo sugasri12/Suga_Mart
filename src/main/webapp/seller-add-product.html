@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Add Product</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="seller-add-product-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="seller-dashboard.html">←🏠</a>
+            <a href="seller-products.html" class="active">🛍️</a>
+            <a href="seller-orders.html" title="Orders">📦</a>
+            <a href="seller-profile.html" title="Profile">👤</a>
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+            <div class="auth-header">
+
+                <p class="eyebrow">
+                    SELLER PORTAL
+                </p>
+
+                <h2>
+                    Add New <span>Product</span>
+                </h2>
+
+                <p>
+                    Add a furniture product to your
+                    SUGA MART store.
+                </p>
+
+            </div>
+
+
+            <!-- ================================
+                 ADD PRODUCT FORM
+                 ================================ -->
+
+            <form
+                id="sellerAddProductForm"
+                class="auth-form"
+            >
+
+                <div class="form-group">
+
+                    <label for="productName">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Enter product name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="productCategory">
+                        Category
+                    </label>
+
+                    <select
+                        id="productCategory"
+                        required
+                    >
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Living Room">
+                            Living Room
+                        </option>
+
+                        <option value="Bedroom">
+                            Bedroom
+                        </option>
+
+                        <option value="Dining Room">
+                            Dining Room
+                        </option>
+
+                        <option value="Study Room">
+                            Study Room
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="productPrice">
+                        Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productPrice"
+                        placeholder="Enter price"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="productStock">
+                        Stock Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        placeholder="Enter stock quantity"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="productDescription">
+                        Product Description
+                    </label>
+
+                    <textarea
+                        id="productDescription"
+                        placeholder="Enter product description"
+                        rows="5"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Add Product
+                </button>
+
+            </form>
+
+
+            <!-- ================================
+                 MESSAGE
+                 ================================ -->
+
+            <p
+                id="sellerAddProductMessage"
+                class="form-message"
+            ></p>
+
+
+            <!-- ================================
+                 BACK LINK
+                 ================================ -->
+
+            <div class="auth-footer-text">
+
+                <a
+                    href="seller-products.html"
+                    class="back-link"
+                >
+                    ← Back to Products
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("sellerAddProductForm");
+        const msg = document.getElementById("sellerAddProductMessage");
+
+        if (!form) return;
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("productName").value.trim();
+            const category = document.getElementById("productCategory").value;
+            const price = Number(document.getElementById("productPrice").value);
+            const stock = Number(document.getElementById("productStock").value);
+            const description = document.getElementById("productDescription").value.trim();
+
+            let sellerName = "Urban Wood Studio";
+            let sellerEmail = "seller@gmail.com";
+            try {
+                const userStr = localStorage.getItem("sugaMartUser");
+                if (userStr) {
+                    const userObj = JSON.parse(userStr);
+                    if (userObj.name) sellerName = userObj.name;
+                    if (userObj.email) sellerEmail = userObj.email;
+                }
+            } catch (err) {}
+
+            const submitBtn = form.querySelector("button[type='submit']");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Adding...";
+
+            try {
+                const response = await fetch(`${API_BASE}/api/products`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name,
+                        category,
+                        price,
+                        stock,
+                        description,
+                        sellerName,
+                        sellerEmail
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    msg.textContent = data.message || "Product added successfully to MySQL!";
+                    msg.style.color = "#176b52";
+                    form.reset();
+                    setTimeout(() => {
+                        window.location.href = "seller-products.html";
+                    }, 1200);
+                } else {
+                    msg.textContent = data.message || "Failed to add product.";
+                    msg.style.color = "#a33a32";
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Add Product";
+                }
+            } catch (err) {
+                msg.textContent = "Network error. Please ensure backend server is running.";
+                msg.style.color = "#a33a32";
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Add Product";
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

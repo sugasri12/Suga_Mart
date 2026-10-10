@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Admin Profile | SUGA MART</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-edit-profile-page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+
+        <div class="brand">
+            <h1>SUGA MART</h1>
+            <p>FURNITURE MARKETPLACE</p>
+        </div>
+
+        <nav class="main-nav">
+            <a href="admin-dashboard.html">←🏠</a>
+            <a href="admin-users.html">Users</a>
+            <a href="admin-sellers.html">Sellers</a>
+            <a href="admin-products.html">Products</a>
+            <a href="admin-orders.html">Orders</a>
+            <a href="admin-reports.html">Reports</a>
+            <a href="admin-reviews.html">Reviews</a>
+            <a href="admin-profile.html" class="active">Profile</a>
+
+            <button
+                type="button"
+                class="logout-button"
+                data-logout>
+                Logout
+            </button>
+        </nav>
+
+    </header>
+
+    <!-- MAIN -->
+    <main class="edit-profile-main">
+
+        <section class="edit-profile-intro">
+            <p class="eyebrow">ADMIN · ACCOUNT SETTINGS</p>
+
+            <h2>Edit <span>Profile</span></h2>
+
+            <p>
+                Update your administrator account information.
+            </p>
+        </section>
+
+        <!-- EDIT FORM -->
+        <section class="edit-profile-card">
+
+            <div class="edit-profile-card-header">
+                <div>
+                    <p class="eyebrow">PERSONAL INFORMATION</p>
+                    <h3>Account Details</h3>
+                </div>
+
+                <span class="profile-status">Admin</span>
+            </div>
+
+            <form id="editProfileForm">
+
+                <div class="edit-form-grid">
+
+                    <div class="edit-form-group">
+                        <label for="adminName">Admin Name</label>
+
+                        <input
+                            type="text"
+                            id="adminName"
+                            name="adminName"
+                            placeholder="Enter admin name"
+                            value="SUGA MART Admin"
+                            required
+                            maxlength="60">
+                    </div>
+
+                    <div class="edit-form-group">
+                        <label for="adminEmail">Email Address</label>
+
+                        <input
+                            type="email"
+                            id="adminEmail"
+                            name="adminEmail"
+                            placeholder="Enter email address"
+                            value="admin@sugamart.com"
+                            required
+                            maxlength="100">
+                    </div>
+
+                    <div class="edit-form-group">
+                        <label for="newPassword">New Password</label>
+
+                        <input
+                            type="password"
+                            id="newPassword"
+                            name="newPassword"
+                            placeholder="Leave blank to keep unchanged"
+                            minlength="8"
+                            autocomplete="new-password">
+                        <small>
+                            Leave blank if you do not want to change it.
+                        </small>
+                    </div>
+
+                    <div class="edit-form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Re-enter new password"
+                            minlength="8"
+                            autocomplete="new-password">
+                    </div>
+
+                </div>
+
+                <p
+                    id="formMessage"
+                    class="edit-form-message"
+                    role="status"
+                    aria-live="polite">
+                </p>
+
+                <div class="edit-profile-actions">
+
+                    <button
+                        type="submit"
+                        class="primary-button">
+                        Save Changes
+                    </button>
+
+                    <a
+                        href="admin-profile.html"
+                        class="secondary-button edit-cancel-button">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- INFORMATION -->
+        <section class="information-card">
+            <p class="eyebrow">ACCOUNT SECURITY</p>
+
+            <h3>Keep your account information up to date.</h3>
+
+            <p>
+                Use an email address you can access.
+                Never share your password with others.
+            </p>
+        </section>
+
+        <div class="page-bottom-action">
+            <a href="admin-profile.html" class="back-link">
+                ← Back to Admin Profile
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+    </footer>
+
+    <!-- FORM FUNCTIONALITY -->
+    <script>
+        const profileForm = document.getElementById("editProfileForm");
+        const formMessage = document.getElementById("formMessage");
+
+        const nameInput = document.getElementById("adminName");
+        const emailInput = document.getElementById("adminEmail");
+        const passwordInput = document.getElementById("newPassword");
+        const confirmInput = document.getElementById("confirmPassword");
+
+        // Load saved name and email, if available.
+        try {
+            const savedName = localStorage.getItem("sugaAdminName");
+            const savedEmail = localStorage.getItem("sugaAdminEmail");
+
+            if (savedName) nameInput.value = savedName;
+            if (savedEmail) emailInput.value = savedEmail;
+        } catch (error) {
+            console.warn("Saved profile could not be loaded.");
+        }
+
+        profileForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmInput.value;
+
+            if (!name || !email) {
+                formMessage.textContent =
+                    "Please enter your name and email address.";
+                formMessage.className = "edit-form-message error-message";
+                return;
+            }
+
+            if (password && password.length < 8) {
+                formMessage.textContent =
+                    "New password must contain at least 8 characters.";
+                formMessage.className = "edit-form-message error-message";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                formMessage.textContent =
+                    "The passwords do not match.";
+                formMessage.className = "edit-form-message error-message";
+                return;
+            }
+
+            try {
+                localStorage.setItem("sugaAdminName", name);
+                localStorage.setItem("sugaAdminEmail", email);
+
+                // This demo does not securely save or authenticate passwords.
+                formMessage.textContent =
+                    "Profile details saved in this browser.";
+                formMessage.className = "edit-form-message success-message";
+
+                passwordInput.value = "";
+                confirmInput.value = "";
+            } catch (error) {
+                formMessage.textContent =
+                    "Could not save the details in this browser.";
+                formMessage.className = "edit-form-message error-message";
+            }
+        });
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

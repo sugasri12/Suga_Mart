@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Buyer Dashboard | SUGA MART</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================
+           ELEGANT HEADER ICONS
+           ========================================= */
+
+        .buyer-dashboard-page .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .buyer-dashboard-page .main-nav .header-icon-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 2px;
+
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+
+            color: #176b52;
+
+            font-size: 21px;
+            line-height: 1;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .buyer-dashboard-page .main-nav .header-icon-link:hover {
+            background: transparent !important;
+            border: none !important;
+            color: #9a7237;
+
+            transform: translateY(-2px);
+        }
+
+        /* Wishlist */
+        .buyer-dashboard-page
+        .main-nav
+        .header-icon-link[aria-label="Wishlist"] {
+            color: #9a7237;
+            font-size: 25px;
+        }
+
+        .buyer-dashboard-page
+        .main-nav
+        .header-icon-link[aria-label="Wishlist"]:hover {
+            color: #176b52;
+        }
+
+        /* =========================================
+           DASHBOARD CARDS
+           ========================================= */
+
+        .dashboard-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 46px;
+            height: 46px;
+
+            margin-bottom: 22px;
+
+            border-radius: 50%;
+
+            background: #e7efe8;
+            color: #176b52;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            line-height: 1;
+        }
+
+        .dashboard-icon.wishlist-icon {
+            background: #f1e7d3;
+            color: #9a7237;
+        }
+
+        .buyer-dashboard-page .dashboard-card .card-number {
+            display: none;
+        }
+
+
+        /* =========================================
+           LOGOUT
+           ========================================= */
+
+        .buyer-dashboard-page .main-nav .logout-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 18px;
+
+            border: 1px solid #d4c5a8;
+            border-radius: 8px;
+
+            background: #fffdf7;
+            color: #176b52;
+
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .buyer-dashboard-page .main-nav .logout-button:hover {
+            background: #176b52;
+            border-color: #176b52;
+            color: #fffdf7;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .buyer-dashboard-page .main-nav {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            .buyer-dashboard-page
+            .main-nav
+            .header-icon-link {
+                font-size: 19px;
+            }
+
+            .buyer-dashboard-page
+            .main-nav
+            .header-icon-link[aria-label="Wishlist"] {
+                font-size: 23px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body class="buyer-dashboard-page">
+
+
+    <!-- =========================================
+         HEADER
+         ========================================= -->
+
+    <header class="site-header">
+
+        <a
+            href="buyer-dashboard.html"
+            class="brand"
+        >
+
+            <span class="brand-mark">
+                S
+            </span>
+
+            <span class="brand-text">
+
+                <h1>
+                    SUGA MART
+                </h1>
+
+                <span>
+                    FURNITURE MARKETPLACE
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="buyer-products.html">
+                🛍️
+            </a>
+
+
+            <!-- Wishlist -->
+
+            <a
+                href="buyer-wishlist.html"
+                class="header-icon-link"
+                title="Wishlist"
+                aria-label="Wishlist"
+            >
+                ♡
+            </a>
+
+
+            <!-- Cart -->
+
+            <a
+                href="buyer-cart.html"
+                class="header-icon-link"
+                title="Cart"
+                aria-label="Cart"
+            >
+                🛒
+            </a>
+
+
+            <!-- Orders -->
+
+            <a
+                href="buyer-orders.html"
+                class="header-icon-link"
+                title="Orders"
+                aria-label="Orders"
+            >
+                📦
+            </a>
+
+
+            <!-- Profile -->
+
+            <a
+                href="buyer-profile.html"
+                class="header-icon-link"
+                title="Profile"
+                aria-label="Profile"
+            >
+                👤
+            </a>
+
+
+            <!-- Logout -->
+
+            <button
+                type="button"
+                class="logout-button"
+                data-logout
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN DASHBOARD
+         ========================================= -->
+
+    <main class="dashboard-main">
+
+
+        <section class="dashboard-intro">
+
+            <p class="eyebrow">
+                BUYER PORTAL
+            </p>
+
+            <h2>
+                Welcome to your
+                <span>SUGA MART</span>
+                account.
+            </h2>
+
+            <p>
+                Explore furniture, manage your wishlist,
+                check your cart and track your orders.
+            </p>
+
+        </section>
+
+
+
+        <section class="dashboard-section">
+
+            <div class="section-heading-row">
+
+                <div>
+
+                    <p class="eyebrow">
+                        QUICK ACCESS
+                    </p>
+
+                    <h3>
+                        Manage your shopping
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-grid">
+
+
+                <!-- Browse Products -->
+
+                <article class="dashboard-card">
+
+                    <div class="dashboard-icon">
+                        ✦
+                    </div>
+
+                    <h4>
+                        Browse Products
+                    </h4>
+
+                    <p>
+                        Explore furniture products
+                        available in SUGA MART.
+                    </p>
+
+                    <a
+                        href="buyer-products.html"
+                        class="secondary-button"
+                    >
+                        View Products
+                    </a>
+
+                </article>
+
+
+
+                <!-- Wishlist -->
+
+                <article class="dashboard-card">
+
+                    <div class="dashboard-icon wishlist-icon">
+                        ♡
+                    </div>
+
+                    <h4>
+                        My Wishlist
+                    </h4>
+
+                    <p>
+                        View furniture products
+                        you have saved for later.
+                    </p>
+
+                    <a
+                        href="buyer-wishlist.html"
+                        class="secondary-button"
+                    >
+                        View Wishlist
+                    </a>
+
+                </article>
+
+
+
+                <!-- Cart -->
+
+                <article class="dashboard-card">
+
+                    <div class="dashboard-icon">
+                        ◈
+                    </div>
+
+                    <h4>
+                        Shopping Cart
+                    </h4>
+
+                    <p>
+                        Check your selected products
+                        and proceed to checkout.
+                    </p>
+
+                    <a
+                        href="buyer-cart.html"
+                        class="secondary-button"
+                    >
+                        Open Cart
+                    </a>
+
+                </article>
+
+
+
+                <!-- Orders -->
+
+                <article class="dashboard-card">
+
+                    <div class="dashboard-icon">
+                        ▣
+                    </div>
+
+                    <h4>
+                        My Orders
+                    </h4>
+
+                    <p>
+                        Track your previous and
+                        current furniture orders.
+                    </p>
+
+                    <a
+                        href="buyer-orders.html"
+                        class="secondary-button"
+                    >
+                        View Orders
+                    </a>
+
+                </article>
+
+
+
+                <!-- Profile -->
+
+                <article class="dashboard-card">
+
+                    <div class="dashboard-icon">
+                        ◉
+                    </div>
+
+                    <h4>
+                        My Profile
+                    </h4>
+
+                    <p>
+                        View and manage your
+                        account information.
+                    </p>
+
+                    <a
+                        href="buyer-profile.html"
+                        class="secondary-button"
+                    >
+                        View Profile
+                    </a>
+
+                </article>
+
+
+
+                <!-- Continue Shopping -->
+
+                <article class="dashboard-card">
+
+                    <div class="dashboard-icon">
+                        ⌂
+                    </div>
+
+                    <h4>
+                        Continue Shopping
+                    </h4>
+
+                    <p>
+                        Discover more furniture
+                        for your beautiful space.
+                    </p>
+
+                    <a
+                        href="buyer-products.html"
+                        class="secondary-button"
+                    >
+                        Shop Now
+                    </a>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer class="site-footer">
+
+        <div>
+
+            <strong>
+                SUGA MART
+            </strong>
+
+            <span>
+                Furniture Marketplace
+            </span>
+
+        </div>
+
+        <p>
+            © 2026 SUGA MART · All rights reserved.
+        </p>
+
+    </footer>
+
+
+    
+    
+<!-- SUGA MART CHATBOT -->
+<div class="chatbot-container">
+
+    <button
+        type="button"
+        id="chatbot-toggle"
+        class="chatbot-toggle"
+        aria-label="Open chat assistant"
+        aria-expanded="false"
+    >
+        <span class="chatbot-logo">✧</span>
+    </button>
+
+    <section
+        id="chatbot-window"
+        class="chatbot-window"
+        aria-label="SUGA MART chat assistant"
+        hidden
+    >
+        <div class="chatbot-header">
+            <div>
+                <h3>SUGA MART Assistant</h3>
+                <p>Furniture shopping help</p>
+            </div>
+
+            <button
+                type="button"
+                id="chatbot-close"
+                class="chatbot-close"
+                aria-label="Close chatbot"
+            >
+                ×
+            </button>
+        </div>
+
+        <div class="chatbot-language">
+            <label for="chatbot-language">Language / மொழி</label>
+
+            <select id="chatbot-language">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+            </select>
+        </div>
+
+        <div
+            id="chatbot-messages"
+            class="chatbot-messages"
+            aria-live="polite"
+        ></div>
+
+        <form id="chatbot-form" class="chatbot-form">
+            <input
+                type="text"
+                id="chatbot-input"
+                placeholder="Ask me anything..."
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit" aria-label="Send message">
+                ➤
+            </button>
+        </form>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+<script src="chatbot.js"></script>
+
+</body>
+
+</html>

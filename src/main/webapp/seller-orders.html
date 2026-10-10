@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Seller Orders</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="seller-orders-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="seller-dashboard.html">←🏠</a>
+            <a href="seller-profile.html" title="Profile">👤</a>
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="orders-main">
+
+        <section class="orders-intro">
+
+            <p class="eyebrow">
+                SELLER ORDERS
+            </p>
+
+            <h2>
+                Customer <span>Orders</span>
+            </h2>
+
+            <p>
+                View and manage orders received from
+                SUGA MART customers.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             ORDERS LIST
+             ================================ -->
+
+        <div id="sellerOrdersContainer">
+
+        <!-- ================================
+             ORDER 01
+             ================================ -->
+
+        <section class="order-card">
+
+            <div class="order-card-content">
+
+                <div class="order-card-header">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            ORDER 01
+                        </p>
+
+                        <h3>
+                            Order #SM1001
+                        </h3>
+
+                    </div>
+
+                    <span class="order-status">
+                        Order Placed
+                    </span>
+
+                </div>
+
+
+                <div class="order-information">
+
+                    <p>
+                        <strong>Customer:</strong>
+                        Suga
+                    </p>
+
+                    <p>
+                        <strong>Product:</strong>
+                        Arden Lounge Chair
+                    </p>
+
+                    <p>
+                        <strong>Quantity:</strong>
+                        1
+                    </p>
+
+                    <p>
+                        <strong>Total:</strong>
+                        ₹18,500
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        Order Placed
+                    </p>
+
+                </div>
+
+
+                <div class="order-actions">
+
+                    <a
+                        href="seller-order-details.html"
+                        class="primary-button"
+                    >
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             ORDER 02
+             ================================ -->
+
+        <section class="order-card">
+
+            <div class="order-card-content">
+
+                <div class="order-card-header">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            ORDER 02
+                        </p>
+
+                        <h3>
+                            Order #SM1002
+                        </h3>
+
+                    </div>
+
+                    <span class="order-status">
+                        Shipped
+                    </span>
+
+                </div>
+
+
+                <div class="order-information">
+
+                    <p>
+                        <strong>Customer:</strong>
+                        Priya
+                    </p>
+
+                    <p>
+                        <strong>Product:</strong>
+                        Nora Dining Table
+                    </p>
+
+                    <p>
+                        <strong>Quantity:</strong>
+                        1
+                    </p>
+
+                    <p>
+                        <strong>Total:</strong>
+                        ₹26,500
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        Shipped
+                    </p>
+
+                </div>
+
+
+                <div class="order-actions">
+
+                    <a
+                        href="seller-order-details.html"
+                        class="primary-button"
+                    >
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        </div>
+
+
+        <!-- ================================
+             INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                ORDER MANAGEMENT
+            </p>
+
+            <h3>
+                Keep track of every customer order.
+            </h3>
+
+            <p>
+                Review order information and open the
+                order details page whenever you need
+                more information.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             BACK TO DASHBOARD
+             ================================ -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="seller-dashboard.html"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

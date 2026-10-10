@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<style>
+/* CUSTOMER REVIEWS */
+.review-section {
+    margin: 40px auto;
+    padding: 30px;
+    max-width: 1100px;
+    background: #fffdf7;
+    border: 1px solid #e5dccb;
+    border-radius: 20px 8px 20px 8px;
+    box-shadow: 0 8px 25px rgba(40, 55, 45, 0.06);
+}
+
+.review-section .eyebrow {
+    color: #a17b3e;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.review-section h3 {
+    margin: 12px 0;
+    color: #176b52;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+}
+
+.review-average {
+    margin: 18px 0 8px;
+    color: #b58a43;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.review-average span {
+    color: #35483e;
+    font-size: 15px;
+}
+
+#reviewCount {
+    color: #77736d;
+    font-size: 14px;
+}
+
+.review-item {
+    padding: 18px 0;
+    border-bottom: 1px solid #eee5d6;
+}
+
+.review-item strong {
+    color: #263b31;
+    font-size: 15px;
+}
+
+.review-item p {
+    margin: 8px 0;
+    color: #66716b;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.review-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5dccb;
+}
+
+.review-form label {
+    color: #35483e;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #d8cebd;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #263b31;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.review-form input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+    border-color: #176b52;
+    box-shadow: 0 0 0 3px rgba(23, 107, 82, 0.1);
+}
+
+.review-form textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.review-form button {
+    justify-self: start;
+    padding: 13px 24px;
+    border: 1px solid #176b52;
+    border-radius: 10px;
+    background: #176b52;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.review-form button:hover {
+    background: #125640;
+    transform: translateY(-1px);
+}
+
+#reviewMessage {
+    color: #176b52;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .review-section {
+        margin: 25px 12px;
+        padding: 20px 16px;
+    }
+
+    .review-section h3 {
+        font-size: 22px;
+    }
+
+    .review-form button {
+        width: 100%;
+    }
+}
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Product Details</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="buyer-product-details-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+            <h1>SUGA MART</h1>
+            <p>FURNITURE MARKETPLACE</p>
+        </div>
+
+        <nav class="main-nav">
+            <a href="buyer-dashboard.html">←🏠</a>
+            <a href="buyer-products.html" class="active">🛍️</a>
+            <a href="buyer-wishlist.html" title="Wishlist">♡</a>
+            <a href="buyer-cart.html" title="Cart">🛒</a>
+            <a href="buyer-orders.html" title="Orders">📦</a>
+            <a href="buyer-profile.html" title="Profile">👤</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN CONTENT
+         ================================ -->
+
+    <main class="product-details-main">
+
+        <!-- PAGE INTRO -->
+
+        <section class="product-details-intro">
+
+            <p class="eyebrow">
+                PRODUCT DETAILS
+            </p>
+
+            <h2>
+                Discover the
+                <span id="introProductName">Arden Lounge Sofa</span>
+            </h2>
+
+            <p id="introProductDesc">
+                A comfortable and elegant furniture piece
+                designed for your living space.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             PRODUCT INFORMATION
+             ================================ -->
+
+        <section class="product-details-card">
+
+            <div class="product-details-header">
+
+                <span class="product-label" id="detailProductCategory">
+                    LIVING ROOM
+                </span>
+
+                <span class="product-number" id="detailProductNumber">
+                    #01
+                </span>
+
+            </div>
+
+
+            <div class="product-details-content">
+
+                <!-- PRODUCT IMAGE -->
+                <div class="product-details-image-wrap" style="margin-bottom: 25px; max-width: 500px;">
+                    <img
+                        id="detailProductImage"
+                        src=""
+                        alt="Product Image"
+                        style="width: 100%; height: 320px; object-fit: cover; border-radius: 14px; border: 1px solid #ddd3c0; display: block;"
+                    >
+                </div>
+
+                <div class="product-details-info">
+
+                    <h3 id="detailProductName">
+                        Arden Lounge Sofa
+                    </h3>
+
+                    <p class="product-price" id="detailProductPrice">
+                        ₹8,875
+                    </p>
+
+                    <p class="product-description" id="detailProductDesc">
+                        A comfortable and elegant lounge piece
+                        designed to add style and comfort to your
+                        living room.
+                    </p>
+
+
+                    <!-- PRODUCT FEATURES -->
+
+                    <div class="features-section">
+
+                        <p class="eyebrow">
+                            PRODUCT FEATURES
+                        </p>
+
+                        <ul class="product-features" id="detailProductFeatures">
+
+                            <li>
+                                Comfortable seating
+                            </li>
+
+                            <li>
+                                Modern furniture design
+                            </li>
+
+                            <li>
+                                Suitable for living rooms
+                            </li>
+
+                            <li>
+                                Strong and durable structure
+                            </li>
+
+                            <li>
+                                Easy to maintain
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="product-detail-actions">
+
+                        <button
+                            type="button"
+                            id="detailAddCartButton"
+                            data-add-cart
+                            data-product-name="Arden Lounge Sofa"
+                            data-product-price="8875"
+                            class="secondary-button"
+                        >
+                            Add to Cart
+                        </button>
+
+                        <button
+                            type="button"
+                            id="detailBuyNowButton"
+                            data-buy-now
+                            data-product-name="Arden Lounge Sofa"
+                            data-product-price="8875"
+                            class="primary-button"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             MORE PRODUCTS
+             ================================ -->
+
+        <section class="information-card">
+
+            <div>
+
+                <p class="eyebrow">
+                    EXPLORE MORE
+                </p>
+
+                <h3>
+                    Need More Products?
+                </h3>
+
+            </div>
+
+            <div class="information-content">
+
+                <p>
+                    Explore all available furniture products
+                    in SUGA MART.
+                </p>
+
+                <a
+                    href="buyer-products.html"
+                    class="primary-button"
+                >
+                    View All Products
+                </a>
+
+            </div>
+
+        </section>
+        
+<!-- CUSTOMER REVIEWS -->
+<section class="review-section" id="customer-reviews">
+
+    <p class="eyebrow">CUSTOMER FEEDBACK</p>
+    <h3>Reviews & Ratings</h3>
+
+    <div class="review-average" id="reviewAverage">
+        ☆☆☆☆☆
+        <span>0.0 out of 5</span>
+    </div>
+
+    <p id="reviewCount">No reviews yet. Be the first to review!</p>
+
+    <div id="reviewList">
+        <p>Customer reviews will appear here.</p>
+    </div>
+
+    <form class="review-form" id="reviewForm">
+
+        <h3>Write a Review</h3>
+
+        <label for="reviewName">Your name</label>
+        <input
+            type="text"
+            id="reviewName"
+            placeholder="Enter your name"
+            maxlength="50"
+            required
+        >
+
+        <label for="reviewRating">Your rating</label>
+        <select id="reviewRating" required>
+            <option value="">Choose a rating</option>
+            <option value="5">★★★★★ - Excellent</option>
+            <option value="4">★★★★ - Very good</option>
+            <option value="3">★★★ - Good</option>
+            <option value="2">★★ - Fair</option>
+            <option value="1">★ - Poor</option>
+        </select>
+
+        <label for="reviewText">Your review</label>
+        <textarea
+            id="reviewText"
+            rows="4"
+            placeholder="Share your experience with this furniture..."
+            maxlength="1000"
+            required
+        ></textarea>
+
+        <button type="submit">Submit Review</button>
+
+        <p id="reviewMessage" role="status"></p>
+
+    </form>
+
+</section>
+        <!-- BACK TO DASHBOARD -->
+
+        <div class="page-back-link">
+
+            <a href="buyer-dashboard.html">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Get the product ID from the URL, such as ?id=1
+    const params = new URLSearchParams(window.location.search);
+    const productId = Number(params.get("id")) || 1;
+
+    // 2. Load product details: first try MySQL backend, fallback to products.js
+    let product = (typeof getProductById === "function") ? getProductById(productId) : null;
+
+    try {
+        const response = await fetch(`${API_BASE}/api/products/${productId}`);
+        const data = await response.json();
+        if (response.ok && data.success && data.product) {
+            const p = data.product;
+            product = {
+                id: p.id,
+                name: p.name,
+                category: p.category,
+                itemType: p.category,
+                price: Number(p.price),
+                seller: p.seller_name || (product ? product.seller : "Urban Wood Studio"),
+                rating: (p.rating !== null && p.rating !== undefined) ? Number(p.rating).toFixed(1) : (product ? product.rating : "4.5"),
+                reviews: p.reviews_count !== undefined ? Number(p.reviews_count) : (product ? product.reviews : 0),
+                description: p.description || (product ? product.description : ""),
+                stock: Number(p.stock || 10),
+                image: p.image_url || (product ? product.image : "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80"),
+                hoverImage: p.image_url || (product ? product.hoverImage : "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80")
+            };
+        }
+    } catch (e) {
+        console.warn("Could not fetch product from MySQL, using catalog:", e);
+    }
+
+    if (product) {
+        document.title = `SUGA MART - ${product.name}`;
+
+        const introName = document.getElementById("introProductName");
+        if (introName) introName.textContent = product.name;
+
+        const introDesc = document.getElementById("introProductDesc");
+        if (introDesc) introDesc.textContent = product.description;
+
+        const detailCategory = document.getElementById("detailProductCategory");
+        if (detailCategory) detailCategory.textContent = product.category.toUpperCase();
+
+        const detailNumber = document.getElementById("detailProductNumber");
+        if (detailNumber) detailNumber.textContent = `#${String(product.id).padStart(2, "0")}`;
+
+        const detailName = document.getElementById("detailProductName");
+        if (detailName) detailName.textContent = product.name;
+
+        const detailPrice = document.getElementById("detailProductPrice");
+        if (detailPrice) detailPrice.textContent = `₹${Number(product.price).toLocaleString("en-IN")}`;
+
+        const detailDesc = document.getElementById("detailProductDesc");
+        if (detailDesc) detailDesc.textContent = product.description;
+
+        const detailImg = document.getElementById("detailProductImage");
+        if (detailImg && product.image) {
+            detailImg.src = product.image;
+            detailImg.alt = product.name;
+        }
+
+        const featuresList = document.getElementById("detailProductFeatures");
+        if (featuresList) {
+            featuresList.innerHTML = `
+                <li>Crafted by <strong>${product.seller}</strong></li>
+                <li>Category: ${product.category} (${product.itemType})</li>
+                <li>Stock: ${product.stock !== undefined ? product.stock : 10} units available</li>
+                <li>Premium quality modern furniture design</li>
+                <li>Strong and durable structure for everyday use</li>
+                <li>Easy to clean and maintain</li>
+            `;
+        }
+
+        const addCartBtn = document.getElementById("detailAddCartButton");
+        if (addCartBtn) {
+            addCartBtn.setAttribute("data-product-id", product.id);
+            addCartBtn.setAttribute("data-product-name", product.name);
+            addCartBtn.setAttribute("data-product-price", product.price);
+            addCartBtn.setAttribute("data-product-image", product.image);
+            addCartBtn.setAttribute("data-product-hover-image", product.hoverImage || product.image);
+            addCartBtn.setAttribute("data-product-seller", product.seller);
+        }
+
+        const buyNowBtn = document.getElementById("detailBuyNowButton");
+        if (buyNowBtn) {
+            buyNowBtn.setAttribute("data-product-name", product.name);
+            buyNowBtn.setAttribute("data-product-price", product.price);
+        }
+    }
+
+    // 3. Review Section & Backend Connection
+    const reviewForm = document.getElementById("reviewForm");
+
+    if (!reviewForm) return;
+
+    const reviewAverage = document.getElementById("reviewAverage");
+    const reviewCount = document.getElementById("reviewCount");
+    const reviewList = document.getElementById("reviewList");
+    const reviewMessage = document.getElementById("reviewMessage");
+
+    async function loadReviews() {
+        try {
+            const response = await fetch(
+                `${API_BASE}/api/reviews/${productId}`
+            );
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error("Could not load reviews.");
+            }
+
+            reviewAverage.replaceChildren();
+
+            const stars = document.createElement("span");
+            stars.textContent =
+                "★".repeat(Math.round(data.averageRating)) +
+                "☆".repeat(5 - Math.round(data.averageRating));
+
+            const score = document.createElement("span");
+            score.textContent = ` ${data.averageRating} out of 5`;
+
+            reviewAverage.append(stars, score);
+
+            reviewCount.textContent =
+                data.totalReviews === 0
+                    ? "No reviews yet. Be the first to review!"
+                    : `${data.totalReviews} customer review(s)`;
+
+            reviewList.replaceChildren();
+
+            if (data.reviews.length === 0) {
+                const emptyMessage = document.createElement("p");
+                emptyMessage.textContent = "No reviews yet.";
+                reviewList.appendChild(emptyMessage);
+                return;
+            }
+
+            data.reviews.forEach((item) => {
+                const card = document.createElement("article");
+                card.className = "review-card";
+
+                const customer = document.createElement("h4");
+                customer.textContent = item.customer_name;
+
+                const rating = document.createElement("p");
+                rating.textContent =
+                    "★".repeat(item.rating) +
+                    "☆".repeat(5 - item.rating);
+
+                const text = document.createElement("p");
+                text.textContent = item.review_text;
+
+                const date = document.createElement("small");
+                date.textContent = new Date(item.created_at)
+                    .toLocaleDateString();
+
+                card.append(customer, rating, text, date);
+                reviewList.appendChild(card);
+            });
+        } catch (error) {
+            reviewMessage.textContent =
+                "Unable to load reviews. Please check the backend server.";
+        }
+    }
+
+    reviewForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const customerName =
+            document.getElementById("reviewName").value.trim();
+        const rating =
+            Number(document.getElementById("reviewRating").value);
+        const reviewText =
+            document.getElementById("reviewText").value.trim();
+
+        reviewMessage.textContent = "Submitting review...";
+
+        try {
+            const response = await fetch(
+                `${API_BASE}/api/reviews`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        productId,
+                        customerName,
+                        rating,
+                        reviewText
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || "Could not submit review.");
+            }
+
+            reviewMessage.textContent = "Thank you! Your review was submitted.";
+            reviewForm.reset();
+
+            await loadReviews();
+        } catch (error) {
+            reviewMessage.textContent =
+                error.message || "Unable to submit review.";
+        }
+    });
+
+    loadReviews();
+});
+</script>
+
+</body>
+</html>

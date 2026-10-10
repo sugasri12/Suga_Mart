@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Buyer Profile | SUGA MART</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="api-config.js"></script>
+
+    <style>
+        .buyer-profile-page {
+            min-height: 100vh;
+            background: #f5f0e5;
+            padding: 35px 20px 55px;
+            color: #33352f;
+        }
+
+        .profile-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .profile-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .profile-brand {
+            color: #176b52;
+            font-family: Georgia, serif;
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .profile-brand span {
+            display: block;
+            color: #9a7237;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 3px;
+            margin-top: 4px;
+        }
+
+        .profile-logout {
+            background: #176b52;
+            color: #fffdf7;
+            border: 1px solid #176b52;
+            border-radius: 6px;
+            padding: 11px 22px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .profile-logout:hover {
+            background: #10513e;
+        }
+
+        .profile-heading {
+            margin-bottom: 25px;
+        }
+
+        .profile-heading p {
+            color: #9a7237;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .profile-heading h1 {
+            color: #176b52;
+            font-family: Georgia, serif;
+            font-size: 34px;
+            margin: 0 0 10px;
+        }
+
+        .profile-heading .subtitle {
+            color: #66645d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .profile-card {
+            background: #fffdf7;
+            border: 1px solid #ddd3c0;
+            border-radius: 14px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(50, 45, 30, 0.06);
+        }
+
+        .profile-avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: #176b52;
+            color: #fffdf7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Georgia, serif;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .profile-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #343b33;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #ddd3c0;
+            border-radius: 7px;
+            background: #fffefa;
+            color: #33352f;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #176b52;
+            box-shadow: 0 0 0 3px rgba(23, 107, 82, 0.10);
+        }
+
+        .form-group textarea {
+            min-height: 95px;
+            resize: vertical;
+        }
+
+        .profile-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e8e0d2;
+        }
+
+        .profile-button {
+            padding: 12px 23px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cancel-button {
+            background: transparent;
+            color: #176b52;
+            border: 1px solid #176b52;
+        }
+
+        .cancel-button:hover {
+            background: #f1f5ef;
+        }
+
+        .save-button {
+            background: #176b52;
+            color: white;
+            border: 1px solid #176b52;
+        }
+
+        .save-button:hover {
+            background: #10513e;
+        }
+
+        .profile-message {
+            display: none;
+            margin-top: 20px;
+            padding: 13px;
+            border-radius: 7px;
+            background: #edf5ed;
+            color: #176b52;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .buyer-profile-page {
+                padding: 22px 14px 35px;
+            }
+
+            .profile-topbar {
+                align-items: flex-start;
+            }
+
+            .profile-brand {
+                font-size: 21px;
+            }
+
+            .profile-logout {
+                padding: 9px 15px;
+            }
+
+            .profile-heading h1 {
+                font-size: 28px;
+            }
+
+            .profile-card {
+                padding: 22px 17px;
+            }
+
+            .profile-form {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .profile-actions {
+                flex-direction: column-reverse;
+            }
+
+            .profile-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="buyer-profile-page">
+        <div class="profile-container">
+
+            <header class="profile-topbar">
+                <a href="home.html" class="profile-brand">
+                    SUGA'S MART
+                    <span>FURNITURE MARKETPLACE</span>
+                </a>
+
+                <button type="button" class="profile-logout"
+                        onclick="logoutBuyer()">
+                    Logout
+                </button>
+            </header>
+
+            <section class="profile-heading">
+                <p>MY ACCOUNT</p>
+                <h1>Edit Your Profile</h1>
+                <div class="subtitle">
+                    Update your personal information and delivery address.
+                </div>
+            </section>
+
+            <section class="profile-card">
+
+                <div class="profile-avatar" id="profileAvatar">B</div>
+
+                <form id="buyerProfileForm" class="profile-form">
+
+                    <div class="form-group">
+                        <label for="buyerName">Full Name</label>
+                        <input type="text" id="buyerName"
+                               placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="buyerEmail">Email Address</label>
+                        <input type="email" id="buyerEmail"
+                               placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="buyerPhone">Phone Number</label>
+                        <input type="tel" id="buyerPhone"
+                               placeholder="Enter your phone number"
+                               pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="buyerCity">City</label>
+                        <input type="text" id="buyerCity"
+                               placeholder="Enter your city" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="buyerAddress">Delivery Address</label>
+                        <textarea id="buyerAddress"
+                                  placeholder="Enter your complete delivery address"
+                                  required></textarea>
+                    </div>
+
+                    <div class="profile-actions form-group full-width">
+                        <button type="button"
+                                class="profile-button cancel-button"
+                                onclick="cancelProfileEdit()">
+                            Cancel
+                        </button>
+
+                        <button type="submit"
+                                class="profile-button save-button">
+                            Save Changes
+                        </button>
+                    </div>
+
+                </form>
+
+                <div id="profileMessage" class="profile-message"
+                     role="status"></div>
+
+            </section>
+        </div>
+    </main>
+
+    <script>
+        async function loadBuyerProfile() {
+            const email = localStorage.getItem("sugaMartEmail") || "suga@gmail.com";
+            document.getElementById("buyerEmail").value = email;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/users/profile/${encodeURIComponent(email)}`);
+                const data = await res.json();
+                if (res.ok && data.success && data.user) {
+                    const u = data.user;
+                    if (u.name) document.getElementById("buyerName").value = u.name;
+                    if (u.phone) document.getElementById("buyerPhone").value = u.phone;
+                    if (u.city) document.getElementById("buyerCity").value = u.city;
+                    if (u.address) document.getElementById("buyerAddress").value = u.address;
+                }
+            } catch (err) {
+                console.warn("Could not load profile from MySQL, using local values:", err);
+            }
+
+            updateAvatar();
+        }
+
+        function updateAvatar() {
+            const name = document.getElementById("buyerName").value.trim();
+            document.getElementById("profileAvatar").textContent =
+                name ? name.charAt(0).toUpperCase() : "B";
+        }
+
+        document.getElementById("buyerName").addEventListener("input", updateAvatar);
+
+        document.getElementById("buyerProfileForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const email = localStorage.getItem("sugaMartEmail") || document.getElementById("buyerEmail").value.trim();
+            const name = document.getElementById("buyerName").value.trim();
+            const phone = document.getElementById("buyerPhone").value.trim();
+            const city = document.getElementById("buyerCity").value.trim();
+            const address = document.getElementById("buyerAddress").value.trim();
+
+            const message = document.getElementById("profileMessage");
+
+            try {
+                const response = await fetch(`${API_BASE}/api/users/profile/${encodeURIComponent(email)}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, phone, city, address })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    message.textContent = "Profile updated successfully in MySQL!";
+                    message.style.display = "block";
+                    message.style.color = "#176b52";
+
+                    // Update localStorage user cache
+                    try {
+                        const userStr = localStorage.getItem("sugaMartUser");
+                        const userObj = userStr ? JSON.parse(userStr) : {};
+                        userObj.name = name;
+                        userObj.phone = phone;
+                        localStorage.setItem("sugaMartUser", JSON.stringify(userObj));
+                    } catch (e) {}
+
+                    setTimeout(() => {
+                        window.location.href = "buyer-profile.html";
+                    }, 1200);
+                } else {
+                    message.textContent = data.message || "Failed to update profile.";
+                    message.style.display = "block";
+                    message.style.color = "#a33a32";
+                }
+            } catch (err) {
+                message.textContent = "Network error while saving profile.";
+                message.style.display = "block";
+                message.style.color = "#a33a32";
+            }
+
+            updateAvatar();
+        });
+
+        function cancelProfileEdit() {
+            window.location.href = "buyer-profile.html";
+        }
+
+        function logoutBuyer() {
+            const confirmed = confirm("Are you sure you want to log out?");
+
+            if (confirmed) {
+                localStorage.removeItem("sugaMartEmail");
+                localStorage.removeItem("sugaMartRole");
+                localStorage.removeItem("sugaMartUser");
+                window.location.href = "buyer-login.html";
+            }
+        }
+
+        loadBuyerProfile();
+    </script>
+
+</body>
+</html>

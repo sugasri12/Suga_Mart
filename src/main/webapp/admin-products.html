@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Admin Products</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-products-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+
+            <a href="admin-dashboard.html">
+                ←🏠
+            </a>
+            <a href="admin-profile.html">
+                👤
+            </a>
+
+            <button
+                type="button"
+                data-logout
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="products-main">
+
+        <section class="products-intro">
+
+            <p class="eyebrow">
+                ADMIN · PRODUCTS
+            </p>
+
+            <h2>
+                Manage <span>Products</span>
+            </h2>
+
+            <p>
+                View and manage all furniture products
+                available in SUGA MART.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             PRODUCT LIST
+             ================================ -->
+
+        <section class="products-section">
+
+            <div class="product-grid" id="adminProductGrid">
+
+
+                <!-- PRODUCT 01 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            ACTIVE
+                        </span>
+
+                        <span class="product-number">
+                            01
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            Arden Lounge Chair
+                        </h3>
+
+                        <p>
+                            <strong>Seller:</strong>
+                            SUGA MART Furniture Store
+                        </p>
+
+                        <p>
+                            <strong>Category:</strong>
+                            Living Room
+                        </p>
+
+                        <p>
+                            <strong>Price:</strong>
+                            ₹18,500
+                        </p>
+
+                        <p>
+                            <strong>Stock:</strong>
+                            10
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            Active
+                        </p>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="alert('Product approved successfully.')"
+                            >
+                                Approve
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="alert('Product removed from marketplace.')"
+                            >
+                                Remove
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCT 02 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            ACTIVE
+                        </span>
+
+                        <span class="product-number">
+                            02
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            Nora Dining Table
+                        </h3>
+
+                        <p>
+                            <strong>Seller:</strong>
+                            SUGA MART Furniture Store
+                        </p>
+
+                        <p>
+                            <strong>Category:</strong>
+                            Dining Room
+                        </p>
+
+                        <p>
+                            <strong>Price:</strong>
+                            ₹26,500
+                        </p>
+
+                        <p>
+                            <strong>Stock:</strong>
+                            8
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            Active
+                        </p>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="alert('Product approved successfully.')"
+                            >
+                                Approve
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="alert('Product removed from marketplace.')"
+                            >
+                                Remove
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCT 03 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            PENDING REVIEW
+                        </span>
+
+                        <span class="product-number">
+                            03
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            Serene Queen Bed
+                        </h3>
+
+                        <p>
+                            <strong>Seller:</strong>
+                            Classic Home Furniture
+                        </p>
+
+                        <p>
+                            <strong>Category:</strong>
+                            Bedroom
+                        </p>
+
+                        <p>
+                            <strong>Price:</strong>
+                            ₹32,000
+                        </p>
+
+                        <p>
+                            <strong>Stock:</strong>
+                            6
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            Pending Review
+                        </p>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="alert('Product approved successfully.')"
+                            >
+                                Approve
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="alert('Product removed from marketplace.')"
+                            >
+                                Remove
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCT 04 -->
+
+                <article class="product-card">
+
+                    <div class="product-card-top">
+
+                        <span class="product-label">
+                            ACTIVE
+                        </span>
+
+                        <span class="product-number">
+                            04
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <h3>
+                            Comfort Sofa Set
+                        </h3>
+
+                        <p>
+                            <strong>Seller:</strong>
+                            Classic Home Furniture
+                        </p>
+
+                        <p>
+                            <strong>Category:</strong>
+                            Living Room
+                        </p>
+
+                        <p>
+                            <strong>Price:</strong>
+                            ₹42,500
+                        </p>
+
+                        <p>
+                            <strong>Stock:</strong>
+                            5
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            Active
+                        </p>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                type="button"
+                                class="primary-button"
+                                onclick="alert('Product approved successfully.')"
+                            >
+                                Approve
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                onclick="alert('Product removed from marketplace.')"
+                            >
+                                Remove
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                PRODUCT MANAGEMENT
+            </p>
+
+            <h3>
+                Review every product before marketplace approval.
+            </h3>
+
+            <p>
+                Admins can review product details,
+                approve products and remove products
+                from the marketplace.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             BACK TO DASHBOARD
+             ================================ -->
+
+        <div class="page-bottom-action">
+
+            <a
+                href="admin-dashboard.html"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const grid = document.getElementById("adminProductGrid");
+        if (!grid) return;
+
+        try {
+            const res = await fetch(`${API_BASE}/api/products`);
+            const data = await res.json();
+
+            if (res.ok && data.success && Array.isArray(data.products) && data.products.length > 0) {
+                grid.innerHTML = "";
+
+                data.products.forEach((p, idx) => {
+                    const card = document.createElement("article");
+                    card.className = "product-card";
+                    const num = String(idx + 1).padStart(2, "0");
+                    const sellerName = p.seller_name || "SUGA MART Seller";
+                    const numPrice = Number(p.price) || 0;
+                    const stockCount = p.stock !== undefined ? p.stock : 10;
+                    const escapedName = p.name.replace(/'/g, "\\'");
+
+                    card.innerHTML = `
+                        <div class="product-card-top">
+                            <span class="product-label">ACTIVE</span>
+                            <span class="product-number">${num}</span>
+                        </div>
+                        <div class="product-content">
+                            <h3>${p.name}</h3>
+                            <p><strong>Seller:</strong> ${sellerName}</p>
+                            <p><strong>Category:</strong> ${p.category}</p>
+                            <p><strong>Price:</strong> ₹${numPrice.toLocaleString("en-IN")}</p>
+                            <p><strong>Stock:</strong> ${stockCount}</p>
+                            <p><strong>Status:</strong> Active</p>
+                            <div class="product-actions">
+                                <button
+                                    type="button"
+                                    class="primary-button"
+                                    onclick="alert('Product ${escapedName} approved!')">
+                                    Approve
+                                </button>
+                                <button
+                                    type="button"
+                                    class="secondary-button"
+                                    onclick="adminDeleteProduct(this, ${p.id}, '${escapedName}')">
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        } catch (e) {
+            console.warn("Could not load admin products from MySQL:", e);
+        }
+    });
+
+    async function adminDeleteProduct(btn, id, name) {
+        if (!confirm(`Are you sure you want to remove "${name}" from MySQL?`)) return;
+        try {
+            const res = await fetch(`${API_BASE}/api/products/${id}`, {
+                method: "DELETE"
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                const card = btn.closest(".product-card");
+                if (card) card.remove();
+                alert(`Product "${name}" removed from MySQL successfully!`);
+            } else {
+                alert(data.message || "Failed to remove product.");
+            }
+        } catch (e) {
+            const card = btn.closest(".product-card");
+            if (card) card.remove();
+            alert(`Product "${name}" removed from view.`);
+        }
+    }
+    </script>
+
+</body>
+</html>

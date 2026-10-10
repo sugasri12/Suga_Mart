@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - My Orders</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="buyer-orders-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="buyer-dashboard.html">←🏠</a>
+            <a href="buyer-products.html" class="active">🛍️</a>
+            <a href="buyer-wishlist.html" title="Wishlist">♡</a>
+            <a href="buyer-cart.html" title="Cart">🛒</a>
+            <a href="buyer-orders.html" title="Orders">📦</a>
+            <a href="buyer-profile.html" title="Profile">👤</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="orders-main">
+
+        <!-- PAGE INTRO -->
+
+        <section class="orders-intro">
+
+            <p class="eyebrow">
+                YOUR PURCHASES
+            </p>
+
+            <h2>
+                My <span>Orders</span>
+            </h2>
+
+            <p>
+                View your recent furniture orders and delivery status.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             ORDERS LIST
+             ================================ -->
+
+        <div id="buyerOrdersContainer">
+
+            <section class="order-card">
+
+                <div class="order-card-content">
+
+                    <div class="order-card-header">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                ORDER
+                            </p>
+
+                            <h3>
+                                #SM1001
+                            </h3>
+
+                        </div>
+
+                        <span class="order-status">
+                            Order Placed
+                        </span>
+
+                    </div>
+
+
+                    <div class="order-details-grid">
+
+                        <div>
+
+                            <span class="detail-label">
+                                Product
+                            </span>
+
+                            <strong>
+                                Arden Lounge Chair
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="detail-label">
+                                Order Date
+                            </span>
+
+                            <strong>
+                                07 October 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="detail-label">
+                                Amount
+                            </span>
+
+                            <strong>
+                                ₹18,500
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="order-card-action">
+
+                    <a
+                        href="buyer-order-details.html"
+                        class="secondary-button"
+                    >
+                        View Details
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- ================================
+             LATEST ORDER STATUS
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                LATEST ORDER
+            </p>
+
+            <h3>
+                Latest Order Status
+            </h3>
+
+            <p>
+                <strong data-shipment-status>
+                    No orders found.
+                </strong>
+            </p>
+
+            <p>
+                Your shipment status will be updated as
+                your order moves through delivery.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             SHIPMENT TRACKING
+             ================================ -->
+
+        <section class="tracking-card">
+
+            <div class="tracking-header">
+
+                <p class="eyebrow">
+                    DELIVERY JOURNEY
+                </p>
+
+                <h3>
+                    Shipment Tracking
+                </h3>
+
+            </div>
+
+
+            <div class="tracking-timeline">
+
+                <div class="tracking-step active">
+
+                    <span class="tracking-number">
+                        01
+                    </span>
+
+                    <strong>
+                        Order Placed
+                    </strong>
+
+                </div>
+
+
+                <div class="tracking-line"></div>
+
+
+                <div class="tracking-step">
+
+                    <span class="tracking-number">
+                        02
+                    </span>
+
+                    <strong>
+                        Order Confirmed
+                    </strong>
+
+                </div>
+
+
+                <div class="tracking-line"></div>
+
+
+                <div class="tracking-step">
+
+                    <span class="tracking-number">
+                        03
+                    </span>
+
+                    <strong>
+                        Packed
+                    </strong>
+
+                </div>
+
+
+                <div class="tracking-line"></div>
+
+
+                <div class="tracking-step">
+
+                    <span class="tracking-number">
+                        04
+                    </span>
+
+                    <strong>
+                        Shipped
+                    </strong>
+
+                </div>
+
+
+                <div class="tracking-line"></div>
+
+
+                <div class="tracking-step">
+
+                    <span class="tracking-number">
+                        05
+                    </span>
+
+                    <strong>
+                        Out for Delivery
+                    </strong>
+
+                </div>
+
+
+                <div class="tracking-line"></div>
+
+
+                <div class="tracking-step">
+
+                    <span class="tracking-number">
+                        06
+                    </span>
+
+                    <strong>
+                        Delivered
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             CONTINUE SHOPPING
+             ================================ -->
+
+        <div class="orders-actions">
+
+            <a
+                href="buyer-products.html"
+                class="primary-button"
+            >
+                Continue Shopping
+            </a>
+
+        </div>
+
+
+        <!-- BACK TO DASHBOARD -->
+
+        <div class="page-back-link">
+
+            <a href="buyer-dashboard.html">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

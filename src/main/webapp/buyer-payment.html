@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUGA MART - Payment</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="buyer-payment-page">
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <h1>SUGA MART</h1>
+
+            <p>
+                FURNITURE MARKETPLACE
+            </p>
+
+        </div>
+
+
+        <nav class="main-nav">
+            <a href="buyer-dashboard.html">←🏠</a>
+            <a href="buyer-checkout.html" class="back-header-button">← Back to Checkout</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+         ================================ -->
+
+    <main class="payment-main">
+
+        <!-- PAGE INTRO -->
+
+        <section class="payment-intro">
+
+            <p class="eyebrow">
+                COMPLETE YOUR ORDER
+            </p>
+
+            <h2>
+                Choose <span>Payment</span>
+            </h2>
+
+            <p>
+                Select your preferred payment method.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             PAYMENT METHOD
+             ================================ -->
+
+        <section class="payment-card">
+
+            <div class="payment-card-header">
+
+                <p class="eyebrow">
+                    STEP 02
+                </p>
+
+                <h3>
+                    Choose Payment Method
+                </h3>
+
+                <p>
+                    Select one of the available payment
+                    methods to continue.
+                </p>
+
+            </div>
+
+
+            <form
+                id="paymentForm"
+                class="payment-form"
+            >
+
+                <!-- =========================
+                     UPI
+                     ========================= -->
+
+                <label
+                    class="payment-option"
+                    for="upi"
+                >
+
+                    <div class="payment-option-content">
+
+                        <div class="payment-option-icon">
+                            U
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                UPI
+                            </h3>
+
+                            <p>
+                                Pay using a UPI application.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="payment-option-select">
+
+                        <input
+                            type="radio"
+                            id="upi"
+                            name="paymentMethod"
+                            value="UPI"
+                        >
+
+                        <span>
+                            Select
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <!-- =========================
+                     QR PAYMENT
+                     ========================= -->
+
+                <label
+                    class="payment-option"
+                    for="qr"
+                >
+
+                    <div class="payment-option-content">
+
+                        <div class="payment-option-icon">
+                            QR
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                QR Payment
+                            </h3>
+
+                            <p>
+                                Scan the QR code to make payment.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="payment-option-select">
+
+                        <input
+                            type="radio"
+                            id="qr"
+                            name="paymentMethod"
+                            value="QR Payment"
+                        >
+
+                        <span>
+                            Select
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <!-- =========================
+                     CASH ON DELIVERY
+                     ========================= -->
+
+                <label
+                    class="payment-option"
+                    for="cod"
+                >
+
+                    <div class="payment-option-content">
+
+                        <div class="payment-option-icon">
+                            ₹
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Cash on Delivery
+                            </h3>
+
+                            <p>
+                                Pay when your furniture is delivered.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="payment-option-select">
+
+                        <input
+                            type="radio"
+                            id="cod"
+                            name="paymentMethod"
+                            value="Cash on Delivery"
+                        >
+
+                        <span>
+                            Select
+                        </span>
+
+                    </div>
+
+                </label>
+
+            <!-- UPI OPTIONS -->
+                <div class="conditional-payment-box" id="upiOptions" style="display:none;">
+
+                    <p class="conditional-title">SELECT UPI METHOD</p>
+
+                    <div class="upi-methods">
+
+                        <label class="upi-method">
+                            <input type="radio" name="upiApp" value="Google Pay">
+                            <span>Google Pay</span>
+                        </label>
+
+                        <label class="upi-method">
+                            <input type="radio" name="upiApp" value="PhonePe">
+                            <span>PhonePe</span>
+                        </label>
+
+                        <label class="upi-method">
+                            <input type="radio" name="upiApp" value="Paytm">
+                            <span>Paytm</span>
+                        </label>
+
+                        <label class="upi-method">
+                            <input type="radio" name="upiApp" value="Other UPI">
+                            <span>Other UPI</span>
+                        </label>
+
+                    </div>
+
+                    <div class="upi-id-box">
+                        <label for="upiId">UPI ID</label>
+                        <input
+                            type="text"
+                            id="upiId"
+                            placeholder="example@upi"
+                        >
+                    </div>
+
+                </div>
+
+
+                <!-- QR PAYMENT -->
+                <div class="conditional-payment-box qr-payment-box"
+                    id="qrPayment"
+                    style="display:none;">
+
+                    <p class="conditional-title">SCAN & PAY</p>
+
+                    <div class="qr-content">
+
+                        <div class="qr-placeholder">
+                            <img
+                                src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=SUGA-MART-PAYMENT"
+                                alt="SUGA MART Payment QR Code"
+                            >
+                        </div>
+
+                        <div>
+                            <h4>Scan this QR code</h4>
+                            <p>
+                                Open your UPI app and scan the QR code
+                                to complete your payment.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COD INFORMATION -->
+
+                <div class="conditional-payment-box"
+                    id="codInformation"
+                    style="display:none;">
+
+                    <p class="conditional-title">CASH ON DELIVERY</p>
+
+                    <p class="cod-text">
+                        Pay securely in cash when your furniture is delivered
+                        to your address.
+                    </p>
+
+                </div>
+
+
+                <!-- PAYMENT MESSAGE -->
+
+                <p
+                    id="paymentMessage"
+                    class="form-message"
+                ></p>
+
+                
+
+
+                <!-- SUBMIT -->
+
+                <div class="payment-form-actions">
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Make Payment
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================================
+             UPI INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                UPI PAYMENT
+            </p>
+
+            <h3>
+                Easy and convenient payment.
+            </h3>
+
+            <p>
+                Select UPI above and continue to complete
+                your payment.
+            </p>
+
+            <p>
+                Supported payment applications can be
+                connected when the backend payment system
+                is added.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             QR INFORMATION
+             ================================ -->
+
+        <section class="information-card">
+
+            <p class="eyebrow">
+                QR PAYMENT
+            </p>
+
+            <h3>
+                Scan and pay securely.
+            </h3>
+
+            <p>
+                QR payment functionality will be connected
+                during the backend integration stage.
+            </p>
+
+        </section>
+
+
+        <!-- BACK TO CHECKOUT -->
+
+        <div class="page-back-link">
+
+            <a href="buyer-checkout.html">
+                ← Back to Checkout
+            </a>
+
+        </div>
+        
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 SUGA MART
+            <span>·</span>
+            Furniture Marketplace
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

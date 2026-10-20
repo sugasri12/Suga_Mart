@@ -5,9 +5,13 @@ const bcrypt = require("bcryptjs");
 const path = require("path");
 const os = require("os");
 const db = require("./db");
+const initDatabase = require("./init_db");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
+// Auto-verify/create database tables and seed products if needed
+initDatabase();
 
 app.use(cors());
 app.use(express.json());

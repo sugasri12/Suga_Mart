@@ -1,0 +1,24 @@
+{
+  "name": "suga-mart",
+  "version": "1.0.0",
+  "description": "SUGA'S MART - Full-Stack Furniture Marketplace",
+  "main": "src/main/backend/server.js",
+  "scripts": {
+    "postinstall": "npm install --prefix src/main/backend",
+    "start": "node src/main/backend/server.js",
+    "dev": "npm run dev --prefix src/main/backend"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ecommerce",
+    "furniture",
+    "marketplace",
+    "nodejs",
+    "express",
+    "mysql"
+  ],
+  "author": "Sugasri",
+  "license": "MIT"
+}
